@@ -7,11 +7,7 @@
 
 <title>Mikeila XVIII — Taiwan Trip Companion</title>
 
-<!-- Leaflet -->
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
 <style>
 :root{
@@ -29,39 +25,22 @@
 }
 
 *{box-sizing:border-box}
-
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
   margin:0;
   background:var(--ivory);
   color:var(--ink);
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",
-  "Segoe UI",sans-serif;
-  padding-bottom:100px;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+  padding-bottom:110px;
 }
 
-button,input,select,textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.hidden{
-  display:none!important;
-}
-
-/* HEADER */
+button,input,select{font:inherit}
+button{cursor:pointer}
 
 header{
-  padding:
-  calc(18px + env(safe-area-inset-top))
-  18px 15px;
-  background:rgba(247,242,224,.92);
+  padding:calc(18px + env(safe-area-inset-top)) 18px 15px;
+  background:rgba(247,242,224,.93);
   backdrop-filter:blur(20px);
   position:sticky;
   top:0;
@@ -77,20 +56,9 @@ header{
   margin:auto;
 }
 
-.brand-title{
-  font-weight:900;
-  letter-spacing:-.03em;
-}
-
-.brand-title span{
-  color:var(--burgundy);
-}
-
-.brand small{
-  color:var(--muted);
-}
-
-/* MAIN */
+.brand-title{font-weight:900;letter-spacing:-.03em}
+.brand-title span{color:var(--burgundy)}
+.brand small{color:var(--muted)}
 
 main{
   max-width:850px;
@@ -98,19 +66,11 @@ main{
   padding:18px 16px 40px;
 }
 
-.screen{
-  display:none;
-}
-
-.screen.active{
-  display:block;
-}
-
-/* HERO */
+.screen{display:none}
+.screen.active{display:block}
 
 .hero{
-  background:
-  linear-gradient(145deg,var(--burgundy),#821D38);
+  background:linear-gradient(145deg,var(--burgundy),#821D38);
   color:white;
   border-radius:30px;
   padding:28px 24px;
@@ -145,11 +105,7 @@ main{
   margin:12px 0;
 }
 
-.hero p{
-  margin:0;
-  color:#E8DDE0;
-  line-height:1.5;
-}
+.hero p{margin:0;color:#E8DDE0}
 
 .trip-countdown{
   margin-top:22px;
@@ -161,9 +117,7 @@ main{
   font-weight:800;
 }
 
-/* DAY SELECTOR */
-
-.day-scroll{
+.day-scroll,.map-controls{
   display:flex;
   gap:8px;
   overflow-x:auto;
@@ -171,7 +125,8 @@ main{
   scrollbar-width:none;
 }
 
-.day-scroll::-webkit-scrollbar{display:none}
+.day-scroll::-webkit-scrollbar,
+.map-controls::-webkit-scrollbar{display:none}
 
 .day-pill{
   white-space:nowrap;
@@ -190,11 +145,7 @@ main{
   border-color:var(--burgundy);
 }
 
-/* SECTION */
-
-.section-title{
-  margin:27px 2px 13px;
-}
+.section-title{margin:27px 2px 13px}
 
 .section-title h2{
   font-family:Georgia,serif;
@@ -209,15 +160,12 @@ main{
   font-size:14px;
 }
 
-/* CARDS */
-
 .card{
   background:#fff;
   border:1px solid var(--line);
   border-radius:23px;
   padding:18px;
   margin-bottom:12px;
-  box-shadow:0 6px 18px rgba(30,20,10,.03);
 }
 
 .stop-card{
@@ -227,8 +175,7 @@ main{
 }
 
 .stop-num{
-  width:40px;
-  height:40px;
+  width:40px;height:40px;
   background:var(--burgundy);
   color:#fff;
   border-radius:50%;
@@ -237,32 +184,13 @@ main{
   font-weight:900;
 }
 
-.stop-card.done{
-  opacity:.55;
-}
+.stop-card.done{opacity:.55}
+.stop-card.done .stop-num{background:var(--green)}
 
-.stop-card.done .stop-num{
-  background:var(--green);
-}
+.stop-content h3{margin:2px 0 5px;font-size:17px}
+.stop-content p{color:var(--muted);margin:0;font-size:13px;line-height:1.5}
 
-.stop-content h3{
-  margin:2px 0 5px;
-  font-size:17px;
-}
-
-.stop-content p{
-  color:var(--muted);
-  margin:0;
-  font-size:13px;
-  line-height:1.5;
-}
-
-.tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-top:10px;
-}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 
 .tag{
   font-size:10px;
@@ -273,12 +201,7 @@ main{
   color:#625A55;
 }
 
-.actions{
-  display:flex;
-  gap:7px;
-  margin-top:13px;
-  flex-wrap:wrap;
-}
+.actions{display:flex;gap:7px;margin-top:13px;flex-wrap:wrap}
 
 .btn{
   border:0;
@@ -288,27 +211,13 @@ main{
   font-weight:850;
 }
 
-.btn-primary{
-  background:var(--burgundy);
-  color:white;
-}
+.btn-primary{background:var(--burgundy);color:white}
+.btn-secondary{background:#F0ECE6;color:var(--ink)}
+.btn-blue{background:#E7F0FB;color:#245783}
+.btn-green{background:#E7F4EC;color:var(--green)}
+.btn-black{background:#111;color:#fff}
 
-.btn-secondary{
-  background:#F0ECE6;
-  color:var(--ink);
-}
-
-.btn-blue{
-  background:#E7F0FB;
-  color:#245783;
-}
-
-.btn-green{
-  background:#E7F4EC;
-  color:var(--green);
-}
-
-/* NEXT CARD */
+/* NEXT / TRANSPORT */
 
 .next{
   background:#fff;
@@ -325,47 +234,95 @@ main{
   font-weight:900;
 }
 
-.next h2{
-  margin:7px 0;
-  font-size:25px;
+.next h2{margin:7px 0;font-size:25px}
+
+.route-from{
+  color:var(--muted);
+  font-size:12px;
+  margin:4px 0 14px;
 }
 
-.transport-grid{
+.transport-options{
+  display:grid;
+  gap:9px;
+  margin-top:15px;
+}
+
+.transport-card{
+  border:1px solid var(--line);
+  background:#FAF8F4;
+  border-radius:18px;
+  padding:14px;
+}
+
+.transport-card.best{
+  border:2px solid var(--blue);
+  background:#F3F8FE;
+}
+
+.transport-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+}
+
+.transport-name{
+  font-weight:900;
+  font-size:15px;
+}
+
+.transport-badge{
+  font-size:9px;
+  padding:5px 7px;
+  border-radius:999px;
+  font-weight:900;
+  background:#E5F0FC;
+  color:#245783;
+}
+
+.transport-stats{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:7px;
-  margin-top:14px;
+  gap:6px;
+  margin-top:11px;
 }
 
-.transport{
-  padding:11px 8px;
-  background:#F6F4F0;
-  border-radius:14px;
-  text-align:center;
-  font-size:11px;
+.stat{
+  background:white;
+  border-radius:11px;
+  padding:8px;
 }
 
-.transport strong{
+.stat small{
   display:block;
-  font-size:13px;
-  margin:4px 0;
+  color:var(--muted);
+  font-size:9px;
+  margin-bottom:3px;
 }
 
-/* MAP */
+.stat strong{font-size:12px}
 
-#map{
-  height:60vh;
-  min-height:440px;
-  border-radius:25px;
-  overflow:hidden;
-  border:1px solid var(--line);
+.transport-note{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.45;
+  margin:10px 0 0;
 }
 
-.map-controls{
+.transport-actions{
   display:flex;
-  overflow-x:auto;
   gap:7px;
-  margin-bottom:12px;
+  margin-top:11px;
+}
+
+.transport-actions button{flex:1}
+
+.estimate-note{
+  font-size:10px;
+  color:#8B827B;
+  line-height:1.5;
+  margin-top:12px;
 }
 
 /* LUGGAGE */
@@ -395,9 +352,23 @@ main{
   font-weight:900;
 }
 
-.switch.on{
-  background:var(--blue);
-  color:#111;
+.switch.on{background:var(--blue);color:#111}
+
+.bag-plan{
+  color:#aaa;
+  font-size:11px;
+  margin-top:8px;
+  line-height:1.5;
+}
+
+/* MAP */
+
+#map{
+  height:60vh;
+  min-height:440px;
+  border-radius:25px;
+  overflow:hidden;
+  border:1px solid var(--line);
 }
 
 /* WALLET */
@@ -423,10 +394,7 @@ main{
   margin:5px 0;
 }
 
-.balance-sub{
-  color:#E3CED4;
-  font-size:13px;
-}
+.balance-sub{color:#E3CED4;font-size:13px}
 
 .wallet-grid{
   display:grid;
@@ -442,15 +410,8 @@ main{
   border-radius:18px;
 }
 
-.metric small{
-  color:var(--muted);
-}
-
-.metric strong{
-  display:block;
-  margin-top:4px;
-  font-size:20px;
-}
+.metric small{color:var(--muted)}
+.metric strong{display:block;margin-top:4px;font-size:20px}
 
 .expense-row{
   display:flex;
@@ -460,48 +421,10 @@ main{
   padding:13px 0;
 }
 
-.expense-row:last-child{
-  border:0;
-}
-
-.expense-info strong{
-  display:block;
-}
-
-.expense-info small{
-  color:var(--muted);
-}
-
-.expense-amount{
-  text-align:right;
-  font-weight:850;
-}
-
-/* FOOD */
-
-.food-hero{
-  background:linear-gradient(140deg,#171515,#423634);
-  color:white;
-  border-radius:28px;
-  padding:25px;
-}
-
-.food-options{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:9px;
-  margin-top:14px;
-}
-
-.food-btn{
-  background:white;
-  color:#191615;
-  border:0;
-  border-radius:17px;
-  padding:16px 12px;
-  text-align:left;
-  font-weight:800;
-}
+.expense-row:last-child{border:0}
+.expense-info strong{display:block}
+.expense-info small{color:var(--muted)}
+.expense-amount{text-align:right;font-weight:850}
 
 /* NAV */
 
@@ -512,7 +435,7 @@ main{
   bottom:calc(10px + env(safe-area-inset-bottom));
   width:min(94%,620px);
   z-index:1000;
-  background:rgba(22,20,20,.93);
+  background:rgba(22,20,20,.94);
   backdrop-filter:blur(20px);
   border-radius:23px;
   display:grid;
@@ -530,34 +453,22 @@ main{
   font-weight:800;
 }
 
-.nav-btn span{
-  display:block;
-  font-size:20px;
-  margin-bottom:3px;
-}
-
-.nav-btn.active{
-  color:white;
-}
-
-/* FLOATING */
+.nav-btn span{display:block;font-size:20px;margin-bottom:3px}
+.nav-btn.active{color:white}
 
 .fab{
   position:fixed;
   right:18px;
   bottom:100px;
   z-index:900;
-  width:52px;
-  height:52px;
-  border:0;
-  border-radius:50%;
+  width:52px;height:52px;
+  border:0;border-radius:50%;
   background:var(--burgundy);
-  color:white;
-  font-size:27px;
+  color:white;font-size:27px;
   box-shadow:0 12px 30px rgba(91,0,21,.3);
 }
 
-/* MODAL */
+/* DIALOG */
 
 dialog{
   border:0;
@@ -572,9 +483,7 @@ dialog::backdrop{
   backdrop-filter:blur(6px);
 }
 
-.modal{
-  padding:23px;
-}
+.modal{padding:23px}
 
 .modal h2{
   font-family:Georgia,serif;
@@ -582,9 +491,7 @@ dialog::backdrop{
   margin-top:4px;
 }
 
-.field{
-  margin:12px 0;
-}
+.field{margin:12px 0}
 
 .field label{
   display:block;
@@ -594,8 +501,7 @@ dialog::backdrop{
   margin-bottom:5px;
 }
 
-.field input,
-.field select{
+.field input,.field select{
   width:100%;
   border:1px solid var(--line);
   border-radius:13px;
@@ -612,7 +518,7 @@ dialog::backdrop{
 
 @media(max-width:500px){
   .hero h1{font-size:37px}
-  .transport-grid{grid-template-columns:1fr}
+  .transport-stats{grid-template-columns:1fr 1fr 1fr}
 }
 </style>
 </head>
@@ -620,1583 +526,1719 @@ dialog::backdrop{
 <body>
 
 <header>
-  <div class="brand">
-    <div>
-      <div class="brand-title">🇹🇼 <span>MIKEILA XVIII</span></div>
-      <small>Taiwan Trip Companion</small>
-    </div>
-    <small>17–21 DEC 2026</small>
+<div class="brand">
+  <div>
+    <div class="brand-title">🇹🇼 <span>MIKEILA XVIII</span></div>
+    <small>Taiwan Trip Companion · V1.1</small>
   </div>
+  <small>17–21 DEC</small>
+</div>
 </header>
 
 <main>
 
-<!-- TODAY -->
-
 <section id="today" class="screen active">
 
-  <div class="hero">
-    <div class="eyebrow">Taiwan · 2026</div>
-    <h1>Five days.<br>One big adventure.</h1>
-    <p>Hannah · Patrick · Mikeila</p>
-    <div id="countdown" class="trip-countdown">Loading trip countdown…</div>
-  </div>
+<div class="hero">
+  <div class="eyebrow">Taiwan · 2026</div>
+  <h1>Five days.<br>One big adventure.</h1>
+  <p>Hannah · Patrick · Mikeila</p>
+  <div id="countdown" class="trip-countdown"></div>
+</div>
 
-  <div id="daySelector" class="day-scroll"></div>
+<div id="daySelector" class="day-scroll"></div>
 
-  <div id="nextStop"></div>
+<div id="nextStop"></div>
 
-  <div class="luggage-banner">
-    <div class="luggage-top">
-      <div>
-        <strong>🧳 Luggage Mode</strong>
-        <div style="font-size:12px;color:#aaa;margin-top:3px">
-          Prioritize easier routes with bags.
-        </div>
+<div class="luggage-banner">
+  <div class="luggage-top">
+    <div>
+      <strong>🧳 Luggage Mode</strong>
+      <div style="font-size:12px;color:#aaa;margin-top:3px">
+        Prioritize easier routes with 3 large suitcases.
       </div>
-      <button id="luggageToggle" class="switch">OFF</button>
     </div>
+    <button id="luggageToggle" class="switch">OFF</button>
   </div>
+  <div id="bagPlan" class="bag-plan"></div>
+</div>
 
-  <div class="section-title">
-    <div class="eyebrow">Today's route</div>
-    <h2 id="dayTitle"></h2>
-    <p id="daySubtitle"></p>
-  </div>
+<div class="section-title">
+  <div class="eyebrow">Today's route</div>
+  <h2 id="dayTitle"></h2>
+  <p id="daySubtitle"></p>
+</div>
 
-  <div id="stopList"></div>
+<div id="stopList"></div>
 
-  <div class="section-title">
-    <div class="eyebrow">Hungry?</div>
-    <h2>Eat near where you are.</h2>
-  </div>
+<div class="section-title">
+  <div class="eyebrow">Hungry?</div>
+  <h2>Eat near where you are.</h2>
+</div>
 
-  <button class="btn btn-primary"
-          style="width:100%;padding:15px"
-          onclick="openFoodNearMe()">
-    🍜 Find food near me
-  </button>
+<button class="btn btn-primary"
+style="width:100%;padding:15px"
+onclick="openFoodNearMe()">
+🍜 Find food near me
+</button>
 
 </section>
-
-
-<!-- ITINERARY -->
 
 <section id="itinerary" class="screen">
 
-  <div class="section-title">
-    <div class="eyebrow">December 17–21</div>
-    <h2>The whole adventure.</h2>
-    <p>Tap a day to see its stops and navigate.</p>
-  </div>
+<div class="section-title">
+  <div class="eyebrow">December 17–21</div>
+  <h2>The whole adventure.</h2>
+  <p>Tap any destination to open Google Maps.</p>
+</div>
 
-  <div id="fullItinerary"></div>
+<div id="fullItinerary"></div>
 
 </section>
-
-
-<!-- MAP -->
 
 <section id="mapScreen" class="screen">
 
-  <div class="section-title">
-    <div class="eyebrow">Live trip map</div>
-    <h2>Where are we going next?</h2>
-    <p>Numbers show the order of each day's stops.</p>
-  </div>
+<div class="section-title">
+  <div class="eyebrow">Live trip map</div>
+  <h2>Where are we going next?</h2>
+  <p>Switch between the whole trip or an individual day.</p>
+</div>
 
-  <div id="mapControls" class="map-controls"></div>
-  <div id="map"></div>
+<div id="mapControls" class="map-controls"></div>
 
-  <button
-    class="btn btn-blue"
-    style="width:100%;margin-top:10px;padding:14px"
-    onclick="locateMe()">
-    ◎ Show my current location
-  </button>
+<div id="map"></div>
+
+<button class="btn btn-blue"
+style="width:100%;margin-top:10px;padding:14px"
+onclick="locateMe()">
+◎ Show my current location
+</button>
 
 </section>
 
-
-<!-- WALLET -->
-
 <section id="wallet" class="screen">
 
-  <div class="section-title">
-    <div class="eyebrow">Shared trip wallet</div>
-    <h2>What have we spent?</h2>
+<div class="section-title">
+  <div class="eyebrow">Trip wallet</div>
+  <h2>What have we spent?</h2>
+</div>
+
+<div class="balance-card">
+  <div class="balance-label">Remaining Trip Budget</div>
+  <div class="balance" id="remainingPHP">₱50,000</div>
+  <div class="balance-sub">
+    Starting budget ₱50,000 · Expense entry in NT$
   </div>
+</div>
 
-  <div class="balance-card">
-    <div class="balance-label">Remaining Trip Budget</div>
-    <div class="balance" id="remainingPHP">₱50,000</div>
-    <div class="balance-sub" id="walletSub">
-      Budget ₱50,000 · Expenses entered in TWD
-    </div>
-  </div>
+<div class="wallet-grid">
 
-  <div class="wallet-grid">
-    <div class="metric">
-      <small>Total spent</small>
-      <strong id="spentTWD">NT$0</strong>
-    </div>
+<div class="metric">
+<small>Total spent</small>
+<strong id="spentTWD">NT$0</strong>
+</div>
 
-    <div class="metric">
-      <small>PHP equivalent</small>
-      <strong id="spentPHP">₱0</strong>
-    </div>
+<div class="metric">
+<small>PHP equivalent</small>
+<strong id="spentPHP">₱0</strong>
+</div>
 
-    <div class="metric">
-      <small>Cash remaining</small>
-      <strong id="cashRemaining">NT$5,000</strong>
-    </div>
+<div class="metric">
+<small>Cash remaining</small>
+<strong id="cashRemaining">NT$5,000</strong>
+</div>
 
-    <div class="metric">
-      <small>Expenses</small>
-      <strong id="expenseCount">0</strong>
-    </div>
-  </div>
+<div class="metric">
+<small>Expenses</small>
+<strong id="expenseCount">0</strong>
+</div>
 
-  <button
-    class="btn btn-primary"
-    style="width:100%;margin-top:12px;padding:14px"
-    onclick="openExpense()">
-    + Add expense
-  </button>
+</div>
 
-  <div class="section-title">
-    <div class="eyebrow">Activity</div>
-    <h2>Recent spending</h2>
-  </div>
+<button class="btn btn-primary"
+style="width:100%;margin-top:12px;padding:14px"
+onclick="openExpense()">
++ Add expense
+</button>
 
-  <div class="card" id="expenseList"></div>
+<div class="section-title">
+<div class="eyebrow">Activity</div>
+<h2>Recent spending</h2>
+</div>
+
+<div class="card" id="expenseList"></div>
 
 </section>
 
 </main>
 
-
-<!-- NAV -->
-
 <nav class="bottom-nav">
 
-  <button class="nav-btn active" data-screen="today">
-    <span>⌂</span>
-    Today
-  </button>
+<button class="nav-btn active" data-screen="today">
+<span>⌂</span>Today
+</button>
 
-  <button class="nav-btn" data-screen="itinerary">
-    <span>☷</span>
-    Itinerary
-  </button>
+<button class="nav-btn" data-screen="itinerary">
+<span>☷</span>Itinerary
+</button>
 
-  <button class="nav-btn" data-screen="mapScreen">
-    <span>⌖</span>
-    Map
-  </button>
+<button class="nav-btn" data-screen="mapScreen">
+<span>⌖</span>Map
+</button>
 
-  <button class="nav-btn" data-screen="wallet">
-    <span>₱</span>
-    Wallet
-  </button>
+<button class="nav-btn" data-screen="wallet">
+<span>₱</span>Wallet
+</button>
 
 </nav>
 
 <button class="fab" onclick="openExpense()">+</button>
 
-
-<!-- EXPENSE MODAL -->
-
 <dialog id="expenseDialog">
 
 <div class="modal">
 
-  <div class="eyebrow">Trip wallet</div>
-  <h2>Add an expense</h2>
+<div class="eyebrow">Trip wallet</div>
+<h2>Add an expense</h2>
 
-  <div class="field">
-    <label>AMOUNT · NT$</label>
-    <input id="expenseAmount"
-           type="number"
-           inputmode="decimal"
-           placeholder="320">
-  </div>
-
-  <div class="field">
-    <label>DESCRIPTION</label>
-    <input id="expenseDescription"
-           placeholder="Beef noodles">
-  </div>
-
-  <div class="field">
-    <label>CATEGORY</label>
-    <select id="expenseCategory">
-      <option>Food</option>
-      <option>Transport</option>
-      <option>Shopping</option>
-      <option>Pasalubong</option>
-      <option>Mikeila</option>
-      <option>Attractions</option>
-      <option>Miscellaneous</option>
-    </select>
-  </div>
-
-  <div class="field">
-    <label>PAID BY</label>
-    <select id="expensePaidBy">
-      <option>Hannah</option>
-      <option>Patrick</option>
-      <option>Mikeila</option>
-    </select>
-  </div>
-
-  <div class="field">
-    <label>PAYMENT METHOD</label>
-    <select id="expenseMethod">
-      <option>Cash</option>
-      <option>GoTyme / Apple Pay</option>
-      <option>Debit / Credit Card</option>
-      <option>Other</option>
-    </select>
-  </div>
-
-  <div class="modal-actions">
-    <button
-      class="btn btn-secondary"
-      onclick="expenseDialog.close()">
-      Cancel
-    </button>
-
-    <button
-      class="btn btn-primary"
-      onclick="saveExpense()">
-      Save expense
-    </button>
-  </div>
-
+<div class="field">
+<label>AMOUNT · NT$</label>
+<input id="expenseAmount" type="number" inputmode="decimal" placeholder="320">
 </div>
 
-</dialog>
+<div class="field">
+<label>DESCRIPTION</label>
+<input id="expenseDescription" placeholder="Beef noodles">
+</div>
 
+<div class="field">
+<label>CATEGORY</label>
+<select id="expenseCategory">
+<option>Food</option>
+<option>Transport</option>
+<option>Shopping</option>
+<option>Pasalubong</option>
+<option>Mikeila</option>
+<option>Attractions</option>
+<option>Miscellaneous</option>
+</select>
+</div>
+
+<div class="field">
+<label>PAID BY</label>
+<select id="expensePaidBy">
+<option>Hannah</option>
+<option>Patrick</option>
+<option>Mikeila</option>
+</select>
+</div>
+
+<div class="field">
+<label>PAYMENT METHOD</label>
+<select id="expenseMethod">
+<option>Cash</option>
+<option>GoTyme / Apple Pay</option>
+<option>Debit / Credit Card</option>
+<option>Other</option>
+</select>
+</div>
+
+<div class="modal-actions">
+<button class="btn btn-secondary" onclick="expenseDialog.close()">Cancel</button>
+<button class="btn btn-primary" onclick="saveExpense()">Save expense</button>
+</div>
+
+</div>
+</dialog>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
 
-/* =====================================================
-   MIKEILA XVIII — TAIWAN TRIP COMPANION V1
-   ===================================================== */
+/* ==========================================================
+   MIKEILA XVIII TAIWAN TRIP COMPANION
+   VERSION 1.1
+   ========================================================== */
 
 const TRIP_BUDGET_PHP = 50000;
 const STARTING_CASH_TWD = 5000;
 
-/*
- Temporary planning FX rate.
- Change this before the trip to the rate you want
- to use for budget tracking.
-*/
+/* Planning FX only. Update before trip. */
 const PHP_PER_TWD = 1.80;
 
 
-/* =====================================================
-   ITINERARY DATA
-   ===================================================== */
+/* ==========================================================
+   ITINERARY + TRANSPORT
+   Costs are planning estimates, not live quotes.
+   ========================================================== */
 
-const itinerary = [
+const itinerary=[
 
 {
-  date:"2026-12-17",
-  short:"DEC 17",
-  title:"Hello, Taiwan",
-  subtitle:"Arrive gently · Zhongshan",
-  luggage:"Full luggage until hotel check-in.",
-  stops:[
+date:"2026-12-17",
+short:"DEC 17",
+title:"Hello, Taiwan",
+subtitle:"Arrival · Zhongshan",
+luggage:"Full luggage → hotel first. Once checked in, luggage mode can be turned off.",
+stops:[
 
-    {
-      name:"Taiwan Taoyuan International Airport",
-      short:"TPE Airport",
-      lat:25.0797,
-      lng:121.2342,
-      note:"Arrival in Taiwan.",
-      transport:"Airport transfer"
-    },
-
-    {
-      name:"HUB Hotel Songshan Inn",
-      search:"HUB Hotel Songshan Inn Taipei 485 Songjiang Road",
-      short:"Songshan HUB",
-      lat:25.068,
-      lng:121.533,
-      note:"Drop luggage and settle in.",
-      transport:"Bus / Taxi / Private transfer"
-    },
-
-    {
-      name:"Xinsheng Park",
-      short:"Xinsheng Park",
-      lat:25.0707,
-      lng:121.5306,
-      note:"Easy first walk in Taipei.",
-      transport:"Walk / Bus"
-    },
-
-    {
-      name:"Zhongshan District Taipei",
-      short:"Zhongshan",
-      lat:25.064,
-      lng:121.525,
-      note:"Cafés, local streets and dinner.",
-      transport:"Walk"
-    }
-  ]
+{
+name:"Taiwan Taoyuan International Airport",
+short:"TPE Airport",
+lat:25.0797,lng:121.2342,
+note:"Welcome to Taiwan.",
+transport:[]
 },
 
 {
-  date:"2026-12-18",
-  short:"DEC 18",
-  title:"Discover Taipei",
-  subtitle:"The big Taipei day",
-  luggage:"Leave all luggage at HUB Hotel.",
-  stops:[
-
-    {
-      name:"Dadaocheng Taipei",
-      short:"Dadaocheng",
-      lat:25.0567,
-      lng:121.5083,
-      note:"Old Taipei streets and atmosphere.",
-      transport:"MRT / Bus"
-    },
-
-    {
-      name:"Ximending",
-      short:"Ximending",
-      lat:25.0422,
-      lng:121.5077,
-      note:"Energetic Taipei district.",
-      transport:"MRT / Sightseeing bus"
-    },
-
-    {
-      name:"Chiang Kai-shek Memorial Hall",
-      short:"CKS Memorial Hall",
-      lat:25.0346,
-      lng:121.5218,
-      note:"Plaza, gardens and architecture.",
-      transport:"MRT / Sightseeing bus"
-    },
-
-    {
-      name:"Songshan Cultural and Creative Park",
-      short:"Songshan Creative Park",
-      lat:25.0437,
-      lng:121.5606,
-      note:"Creative spaces and design.",
-      transport:"MRT / Bus"
-    },
-
-    {
-      name:"Taipei 101",
-      short:"Taipei 101",
-      lat:25.0339,
-      lng:121.5645,
-      note:"Xinyi exploration and iconic Taipei photos.",
-      transport:"MRT / Bus"
-    },
-
-    {
-      name:"Tao Zhu Yin Yuan Taipei",
-      short:"Twisted Building",
-      lat:25.0317,
-      lng:121.5669,
-      note:"Photo stop for the twisted building.",
-      transport:"Walk"
-    },
-
-    {
-      name:"Raohe Street Night Market",
-      short:"Raohe",
-      lat:25.0509,
-      lng:121.5775,
-      note:"Evening food exploration.",
-      transport:"MRT / Bus"
-    }
-  ]
+name:"HUB Hotel Songshan Inn",
+search:"HUB Hotel Songshan Inn Taipei 485 Songjiang Road",
+short:"Songshan HUB",
+lat:25.068,lng:121.533,
+note:"Drop luggage and settle in.",
+transport:[
+{
+icon:"🚌",name:"Airport Bus",
+time:"~60–80 min",
+cost:"Est. NT$250–400",
+per:"3 travelers",
+note:"Check live 1841 service and stop in Google Maps.",
+maps:"transit",
+badge:"VALUE"
+},
+{
+icon:"🚕",name:"Uber / Taxi",
+time:"~40–55 min",
+cost:"Est. NT$1,200–1,500",
+per:"per car",
+note:"Simplest with 3 travelers and large suitcases.",
+uber:true,
+badge:"LUGGAGE"
+}
+]
 },
 
 {
-  date:"2026-12-19",
-  short:"DEC 19",
-  title:"Adventure",
-  subtitle:"HSR · Alishan · Chiayi",
-  luggage:"Store large luggage in Chiayi. Bring day bags to Alishan.",
-  stops:[
-
-    {
-      name:"HUB Hotel Songshan Inn",
-      short:"Songshan HUB",
-      lat:25.068,
-      lng:121.533,
-      note:"Early checkout.",
-      transport:"Taxi / MRT"
-    },
-
-    {
-      name:"Taipei Main Station",
-      short:"Taipei Main",
-      lat:25.0478,
-      lng:121.5170,
-      note:"Board HSR to Chiayi.",
-      transport:"MRT / Taxi"
-    },
-
-    {
-      name:"THSR Chiayi Station",
-      short:"Chiayi HSR",
-      lat:23.4593,
-      lng:120.3233,
-      note:"Store large luggage before Alishan.",
-      transport:"HSR"
-    },
-
-    {
-      name:"Alishan National Forest Recreation Area",
-      short:"Alishan",
-      lat:23.5102,
-      lng:120.8013,
-      note:"Around 4 hours: forest railway, Zhaoping and forest walks.",
-      transport:"Taiwan Tourist Shuttle / Car"
-    },
-
-    {
-      name:"Chiayi City",
-      short:"Chiayi",
-      lat:23.4801,
-      lng:120.4491,
-      note:"Hotel check-in and relaxed evening.",
-      transport:"Bus / Taxi"
-    }
-  ]
+name:"Xinsheng Park",
+short:"Xinsheng Park",
+lat:25.0707,lng:121.5306,
+note:"Relaxed first walk.",
+transport:[
+{
+icon:"🚶",name:"Walk",
+time:"~10–20 min",
+cost:"FREE",
+per:"",
+note:"Easy option after checking in.",
+maps:"walking",
+badge:"VALUE"
+},
+{
+icon:"🚕",name:"Uber",
+time:"~5–10 min",
+cost:"Est. NT$100–160",
+per:"per car",
+note:"Useful if everyone is tired.",
+uber:true
+}
+]
 },
 
 {
-  date:"2026-12-20",
-  short:"DEC 20",
-  title:"Celebrate",
-  subtitle:"Meteor Garden · Shopping · Birthday finale",
-  luggage:"Leave suitcases at Chiayi hotel during CCU visit.",
-  stops:[
+name:"Zhongshan District Taipei",
+short:"Zhongshan",
+lat:25.064,lng:121.525,
+note:"Cafés, streets, shops and local dinner.",
+transport:[
+{
+icon:"🚶",name:"Walk / Explore",
+time:"Flexible",
+cost:"FREE",
+per:"",
+note:"Explore rather than rush between pins.",
+maps:"walking",
+badge:"VALUE"
+},
+{
+icon:"🚕",name:"Uber",
+time:"Varies",
+cost:"Est. NT$100–200",
+per:"per car",
+note:"Use when tired or going to a specific restaurant.",
+uber:true
+}
+]
+}
 
-    {
-      name:"Chiayi City",
-      short:"Chiayi Hotel",
-      lat:23.4801,
-      lng:120.4491,
-      note:"Check out but ask hotel to hold luggage.",
-      transport:"Taxi"
-    },
-
-    {
-      name:"National Chung Cheng University",
-      short:"CCU · Meteor Garden",
-      lat:23.5615,
-      lng:120.4727,
-      note:"Meteor Garden filming locations. Allow 2–3 hours.",
-      transport:"Taxi recommended"
-    },
-
-    {
-      name:"THSR Chiayi Station",
-      short:"Chiayi HSR",
-      lat:23.4593,
-      lng:120.3233,
-      note:"Travel north after collecting luggage.",
-      transport:"Taxi + HSR"
-    },
-
-    {
-      name:"Taipei Main Station",
-      short:"Taipei",
-      lat:25.0478,
-      lng:121.5170,
-      note:"Final Taipei shopping / luggage strategy.",
-      transport:"HSR"
-    },
-
-    {
-      name:"Din Tai Fung Taipei",
-      short:"Din Tai Fung",
-      lat:25.0339,
-      lng:121.5645,
-      note:"Mikeila's birthday finale meal.",
-      transport:"MRT / Taxi"
-    },
-
-    {
-      name:"Holiday Inn Taoyuan Airport",
-      short:"Holiday Inn",
-      lat:25.063,
-      lng:121.196,
-      note:"Final night near the airport.",
-      transport:"Airport MRT + Taxi / Taxi"
-    }
-  ]
+]
 },
 
 {
-  date:"2026-12-21",
-  short:"DEC 21",
-  title:"Home",
-  subtitle:"Easy departure · Manila",
-  luggage:"All luggage with you.",
-  stops:[
+date:"2026-12-18",
+short:"DEC 18",
+title:"Discover Taipei",
+subtitle:"The big Taipei day",
+luggage:"Leave all suitcases at HUB. Day bags only.",
+stops:[
 
-    {
-      name:"Holiday Inn Taoyuan Airport",
-      short:"Holiday Inn",
-      lat:25.063,
-      lng:121.196,
-      note:"Check out early.",
-      transport:"Hotel transfer"
-    },
+{
+name:"Dadaocheng Taipei",
+short:"Dadaocheng",
+lat:25.0567,lng:121.5083,
+note:"Old Taipei streets and atmosphere.",
+transport:[
+{
+icon:"🚇",name:"MRT / Bus",
+time:"~25–40 min",
+cost:"Est. NT$60–120",
+per:"total / 3",
+note:"Check the live public transport route.",
+maps:"transit",
+badge:"VALUE"
+},
+{
+icon:"🚕",name:"Uber",
+time:"~15–25 min",
+cost:"Est. NT$180–300",
+per:"per car",
+note:"Convenient for three people.",
+uber:true
+}
+]
+},
 
-    {
-      name:"Taiwan Taoyuan International Airport",
-      short:"TPE Airport",
-      lat:25.0797,
-      lng:121.2342,
-      note:"Target arrival around 7:00 AM for the 10:00 AM flight.",
-      transport:"Hotel airport transfer"
-    }
-  ]
+{
+name:"Ximending",
+short:"Ximending",
+lat:25.0422,lng:121.5077,
+note:"Energetic Taipei district.",
+transport:[
+{
+icon:"🚇",name:"Public Transport",
+time:"~15–25 min",
+cost:"Est. NT$60–90",
+per:"total / 3",
+note:"Use Google Maps for the current bus/MRT combination.",
+maps:"transit",
+badge:"VALUE"
+},
+{
+icon:"🚕",name:"Uber",
+time:"~10–20 min",
+cost:"Est. NT$150–250",
+per:"per car",
+note:"Compare against live traffic.",
+uber:true
+}
+]
+},
+
+{
+name:"Chiang Kai-shek Memorial Hall",
+short:"CKS Memorial Hall",
+lat:25.0346,lng:121.5218,
+note:"Plaza, gardens and architecture.",
+transport:[
+{
+icon:"🚇",name:"MRT",
+time:"~15 min",
+cost:"Est. NT$60",
+per:"total / 3",
+note:"Straightforward Taipei public transport leg.",
+maps:"transit",
+badge:"VALUE"
+},
+{
+icon:"🚕",name:"Uber",
+time:"~10–15 min",
+cost:"Est. NT$130–220",
+per:"per car",
+note:"Faster depending on traffic.",
+uber:true
+}
+]
+},
+
+{
+name:"Songshan Cultural and Creative Park",
+short:"Songshan Creative Park",
+lat:25.0437,lng:121.5606,
+note:"Design, creative spaces and photos.",
+transport:[
+{
+icon:"🚇",name:"MRT",
+time:"~25–35 min",
+cost:"Est. NT$75–90",
+per:"total / 3",
+note:"Use live transit directions.",
+maps:"transit",
+badge:"VALUE"
+},
+{
+icon:"🚕",name:"Uber",
+time:"~15–25 min",
+cost:"Est. NT$200–320",
+per:"per car",
+note:"Useful if running behind schedule.",
+uber:true,
+badge:"FASTER"
+}
+]
+},
+
+{
+name:"Taipei 101",
+short:"Taipei 101",
+lat:25.0339,lng:121.5645,
+note:"Xinyi exploration and Taipei 101.",
+transport:[
+{
+icon:"🚇",name:"MRT / Walk",
+time:"~15–25 min",
+cost:"Est. NT$60–75",
+per:"total / 3",
+note:"Good-value option.",
+maps:"transit",
+badge:"VALUE"
+},
+{
+icon:"🚕",name:"Uber",
+time:"~8–15 min",
+cost:"Est. NT$120–200",
+per:"per car",
+note:"May be worthwhile for three people.",
+uber:true
+}
+]
+},
+
+{
+name:"Tao Zhu Yin Yuan Taipei",
+short:"Twisted Building",
+lat:25.0317,lng:121.5669,
+note:"Photo stop for Tao Zhu Yin Yuan.",
+transport:[
+{
+icon:"🚶",name:"Walk",
+time:"~10–15 min",
+cost:"FREE",
+per:"",
+note:"Close enough to walk from the Taipei 101 area.",
+maps:"walking",
+badge:"BEST"
+}
+]
+},
+
+{
+name:"Raohe Street Night Market",
+short:"Raohe",
+lat:25.0509,lng:121.5775,
+note:"Evening food exploration.",
+transport:[
+{
+icon:"🚇",name:"MRT",
+time:"~20–30 min",
+cost:"Est. NT$60–90",
+per:"total / 3",
+note:"Good-value evening option.",
+maps:"transit",
+badge:"VALUE"
+},
+{
+icon:"🚕",name:"Uber",
+time:"~15–25 min",
+cost:"Est. NT$180–280",
+per:"per car",
+note:"Easy if tired after the Taipei day.",
+uber:true
+}
+]
+}
+
+]
+},
+
+{
+date:"2026-12-19",
+short:"DEC 19",
+title:"Adventure",
+subtitle:"HSR · Alishan · Chiayi",
+luggage:"Take suitcases to Chiayi, store them there, then continue to Alishan with day bags only.",
+stops:[
+
+{
+name:"HUB Hotel Songshan Inn",
+short:"Songshan HUB",
+lat:25.068,lng:121.533,
+note:"Early checkout.",
+transport:[]
+},
+
+{
+name:"Taipei Main Station",
+short:"Taipei Main",
+lat:25.0478,lng:121.5170,
+note:"Board HSR to Chiayi.",
+transport:[
+{
+icon:"🚇",name:"MRT",
+time:"~20–35 min",
+cost:"Est. NT$60–90",
+per:"total / 3",
+note:"Cheapest, but consider 3 large suitcases.",
+maps:"transit",
+badge:"VALUE"
+},
+{
+icon:"🚕",name:"Uber",
+time:"~15–25 min",
+cost:"Est. NT$200–350",
+per:"per car",
+note:"Much easier on the early luggage morning.",
+uber:true,
+badge:"LUGGAGE"
+}
+]
+},
+
+{
+name:"THSR Chiayi Station",
+short:"Chiayi HSR",
+lat:23.4593,lng:120.3233,
+note:"Arrive by HSR and store large luggage.",
+transport:[
+{
+icon:"🚄",name:"THSR",
+time:"~1 hr 15–30",
+cost:"Check booked fare",
+per:"× 3 travelers",
+note:"Reserve seats in advance once booking opens.",
+maps:"transit",
+badge:"BOOK"
+}
+]
+},
+
+{
+name:"Alishan National Forest Recreation Area",
+short:"Alishan",
+lat:23.5102,lng:120.8013,
+note:"Forest railway + Zhaoping + forest walks. Around 4 hours sightseeing.",
+transport:[
+{
+icon:"🚌",name:"Tourist Shuttle",
+time:"~2–2.5 hr",
+cost:"Est. NT$372–426",
+per:"total / 3",
+note:"HSR Chiayi → Alishan. Recheck December timetable and fare before travel.",
+maps:"transit",
+badge:"VALUE"
+},
+{
+icon:"🚕",name:"Car / Taxi",
+time:"~1.5–2 hr",
+cost:"Est. NT$1,800–2,800",
+per:"per vehicle",
+note:"Faster and more flexible, but substantially more expensive.",
+uber:true,
+badge:"FASTER"
+}
+]
+},
+
+{
+name:"Chiayi City",
+short:"Chiayi",
+lat:23.4801,lng:120.4491,
+note:"Retrieve luggage, hotel check-in and relaxed evening.",
+transport:[
+{
+icon:"🚌",name:"Bus",
+time:"~2–2.5 hr",
+cost:"Est. NT$300–450",
+per:"total / 3",
+note:"Public transport down from Alishan.",
+maps:"transit",
+badge:"VALUE"
+},
+{
+icon:"🚕",name:"Car / Taxi",
+time:"~1.5–2 hr",
+cost:"Est. NT$1,800–2,800",
+per:"vehicle",
+note:"Only worth considering if timing or fatigue makes the bus impractical.",
+uber:true
+}
+]
+}
+
+]
+},
+
+{
+date:"2026-12-20",
+short:"DEC 20",
+title:"Celebrate",
+subtitle:"Meteor Garden · Shopping · Birthday finale",
+luggage:"Leave all suitcases at the Chiayi hotel while visiting CCU. Retrieve them before HSR north.",
+stops:[
+
+{
+name:"Chiayi City",
+short:"Chiayi Hotel",
+lat:23.4801,lng:120.4491,
+note:"Check out and ask the hotel to hold luggage.",
+transport:[]
+},
+
+{
+name:"National Chung Cheng University",
+short:"CCU · Meteor Garden",
+lat:23.5615,lng:120.4727,
+note:"Meteor Garden filming locations. Around 2–3 hours.",
+transport:[
+{
+icon:"🚌",name:"Public Transport",
+time:"~45–75 min",
+cost:"Est. NT$100–200",
+per:"total / 3",
+note:"Cheaper but may involve waiting/transfers.",
+maps:"transit",
+badge:"VALUE"
+},
+{
+icon:"🚕",name:"Uber / Taxi",
+time:"~30–40 min",
+cost:"Est. NT$500–800",
+per:"per car",
+note:"Preferred for this special-purpose stop.",
+uber:true,
+badge:"EASIER"
+}
+]
+},
+
+{
+name:"THSR Chiayi Station",
+short:"Chiayi HSR",
+lat:23.4593,lng:120.3233,
+note:"Retrieve luggage first, then travel to HSR.",
+transport:[
+{
+icon:"🚕",name:"Taxi / Uber",
+time:"~25–40 min",
+cost:"Est. NT$400–650",
+per:"per car",
+note:"Recommended with three large suitcases.",
+uber:true,
+badge:"LUGGAGE"
+},
+{
+icon:"🚌",name:"Public Transport",
+time:"~40–70 min",
+cost:"Est. NT$60–150",
+per:"total / 3",
+note:"Cheaper, but luggage makes this less attractive.",
+maps:"transit"
+}
+]
+},
+
+{
+name:"Taipei Main Station",
+short:"Taipei Main",
+lat:25.0478,lng:121.5170,
+note:"HSR north and final Taipei shopping.",
+transport:[
+{
+icon:"🚄",name:"THSR",
+time:"~1 hr 15–30",
+cost:"Check booked fare",
+per:"× 3 travelers",
+note:"Reserve seats when your HSR booking is finalized.",
+maps:"transit",
+badge:"BOOK"
+}
+]
+},
+
+{
+name:"Din Tai Fung Taipei",
+short:"Din Tai Fung",
+lat:25.0339,lng:121.5645,
+note:"Birthday finale meal. Final branch should match the shopping route.",
+transport:[
+{
+icon:"🚇",name:"MRT",
+time:"Depends on branch",
+cost:"Est. NT$60–100",
+per:"total / 3",
+note:"Final route depends on which Din Tai Fung branch we lock.",
+maps:"transit",
+badge:"VALUE"
+},
+{
+icon:"🚕",name:"Uber",
+time:"Depends on branch",
+cost:"Est. NT$180–350",
+per:"per car",
+note:"Useful after shopping.",
+uber:true
+}
+]
+},
+
+{
+name:"Holiday Inn Taoyuan Airport",
+short:"Holiday Inn",
+lat:25.063,lng:121.196,
+note:"Final night near TPE.",
+transport:[
+{
+icon:"🚆",name:"Airport MRT + Taxi",
+time:"~50–75 min",
+cost:"Est. NT$500–800",
+per:"total / 3",
+note:"Public-transport option with luggage.",
+maps:"transit",
+badge:"VALUE"
+},
+{
+icon:"🚕",name:"Uber / Taxi",
+time:"~45–65 min",
+cost:"Est. NT$1,200–1,700",
+per:"per car",
+note:"Door-to-door and simplest with all luggage.",
+uber:true,
+badge:"LUGGAGE"
+}
+]
+}
+
+]
+},
+
+{
+date:"2026-12-21",
+short:"DEC 21",
+title:"Home",
+subtitle:"Easy departure · Manila",
+luggage:"All luggage with you. No tourism today.",
+stops:[
+
+{
+name:"Holiday Inn Taoyuan Airport",
+short:"Holiday Inn",
+lat:25.063,lng:121.196,
+note:"Early checkout.",
+transport:[]
+},
+
+{
+name:"Taiwan Taoyuan International Airport",
+short:"TPE Airport",
+lat:25.0797,lng:121.2342,
+note:"Target airport arrival around 7:00 AM for the 10:00 AM flight.",
+transport:[
+{
+icon:"🏨",name:"Hotel Transfer",
+time:"Confirm with hotel",
+cost:"Confirm",
+per:"",
+note:"Reserve the hotel airport transfer in advance.",
+badge:"PLAN A"
+},
+{
+icon:"🚕",name:"Uber / Taxi",
+time:"~15–25 min",
+cost:"Est. NT$300–500",
+per:"per car",
+note:"Backup if hotel transfer is unavailable.",
+uber:true,
+badge:"BACKUP"
+}
+]
+}
+
+]
 }
 
 ];
 
 
-/* =====================================================
+/* ==========================================================
    STATE
-   ===================================================== */
+   ========================================================== */
 
-let selectedDay = 0;
-let luggageMode =
-  JSON.parse(localStorage.getItem("taiwanLuggageMode") || "false");
-
-let completed =
-  JSON.parse(localStorage.getItem("taiwanCompleted") || "{}");
-
-let expenses =
-  JSON.parse(localStorage.getItem("taiwanExpenses") || "[]");
+let selectedDay=0;
+let luggageMode=JSON.parse(localStorage.getItem("taiwanLuggageMode")||"false");
+let completed=JSON.parse(localStorage.getItem("taiwanCompleted")||"{}");
+let expenses=JSON.parse(localStorage.getItem("taiwanExpenses")||"[]");
 
 let map;
 let mapLayer;
 let userMarker;
 
 
-/* =====================================================
+/* ==========================================================
    COUNTDOWN
-   ===================================================== */
+   ========================================================== */
 
 function renderCountdown(){
 
-  const start = new Date("2026-12-17T00:00:00+08:00");
-  const now = new Date();
+const start=new Date("2026-12-17T00:00:00+08:00");
+const now=new Date();
+const diff=Math.ceil((start-now)/(1000*60*60*24));
+const el=document.getElementById("countdown");
 
-  const diff = Math.ceil(
-    (start-now)/(1000*60*60*24)
-  );
+if(diff>0) el.textContent=`${diff} days until Taiwan 🇹🇼`;
+else if(diff>=-4) el.textContent="We're in Taiwan 🇹🇼";
+else el.textContent="Taiwan memories ♡";
 
-  const el = document.getElementById("countdown");
-
-  if(diff > 0){
-    el.textContent = `${diff} days until Taiwan 🇹🇼`;
-  }
-  else if(diff >= -4){
-    el.textContent = "We're in Taiwan 🇹🇼";
-  }
-  else{
-    el.textContent = "Taiwan memories ♡";
-  }
 }
 
 
-/* =====================================================
+/* ==========================================================
    GOOGLE MAPS
-   ===================================================== */
+   ========================================================== */
 
-function navigateTo(stop){
+function openGoogleMaps(stop,mode){
 
-  const destination =
-    stop.search ||
-    `${stop.lat},${stop.lng}`;
+let destination=stop.search || `${stop.lat},${stop.lng}`;
 
-  const url =
-    "https://www.google.com/maps/dir/?api=1&destination=" +
-    encodeURIComponent(destination);
+let url=
+"https://www.google.com/maps/dir/?api=1"+
+"&destination="+encodeURIComponent(destination);
 
-  window.open(url,"_blank");
+if(mode){
+url+="&travelmode="+mode;
+}
+
+window.location.href=url;
+
 }
 
 
-function searchGoogleMaps(query){
+/* ==========================================================
+   UBER — iPHONE HANDOFF
+   ========================================================== */
 
-  const url =
-    "https://www.google.com/maps/search/?api=1&query=" +
-    encodeURIComponent(query);
+function openUber(stop){
 
-  window.open(url,"_blank");
+const nickname=encodeURIComponent(stop.short || stop.name);
+
+const uberURL=
+`https://m.uber.com/ul/?action=setPickup`+
+`&pickup=my_location`+
+`&dropoff[latitude]=${stop.lat}`+
+`&dropoff[longitude]=${stop.lng}`+
+`&dropoff[nickname]=${nickname}`;
+
+/*
+Uber Universal Link:
+- iPhone with Uber available: iOS can hand the link to Uber.
+- Otherwise Uber's web flow remains available and can direct
+  the traveler toward installation/sign-in as appropriate.
+*/
+
+window.location.href=uberURL;
+
 }
 
 
-/* =====================================================
+/* ==========================================================
    FOOD NEAR ME
-   ===================================================== */
+   ========================================================== */
 
 function openFoodNearMe(){
 
-  if(!navigator.geolocation){
+if(!navigator.geolocation){
+window.location.href=
+"https://www.google.com/maps/search/?api=1&query="+
+encodeURIComponent("Taiwanese food near me");
+return;
+}
 
-    searchGoogleMaps(
-      "Taiwanese restaurants near me"
-    );
+navigator.geolocation.getCurrentPosition(
 
-    return;
-  }
+pos=>{
 
-  navigator.geolocation.getCurrentPosition(
+const lat=pos.coords.latitude;
+const lng=pos.coords.longitude;
 
-    position=>{
+window.location.href=
+"https://www.google.com/maps/search/?api=1&query="+
+encodeURIComponent("Taiwanese food")+
+`&center=${lat},${lng}`;
 
-      const lat=position.coords.latitude;
-      const lng=position.coords.longitude;
+},
 
-      const url =
-        `https://www.google.com/maps/search/?api=1&query=` +
-        encodeURIComponent("Taiwanese food") +
-        `&center=${lat},${lng}`;
+()=>{
 
-      window.open(url,"_blank");
+window.location.href=
+"https://www.google.com/maps/search/?api=1&query="+
+encodeURIComponent("Taiwanese food near me");
 
-    },
+},
 
-    ()=>{
+{enableHighAccuracy:true,timeout:8000}
 
-      searchGoogleMaps(
-        "Taiwanese food near me"
-      );
+);
 
-    },
-
-    {
-      enableHighAccuracy:true,
-      timeout:7000
-    }
-
-  );
 }
 
 
-/* =====================================================
+/* ==========================================================
    DAY SELECTOR
-   ===================================================== */
+   ========================================================== */
 
 function renderDaySelector(){
 
-  const holder =
-    document.getElementById("daySelector");
+const holder=document.getElementById("daySelector");
+holder.innerHTML="";
 
-  holder.innerHTML="";
+itinerary.forEach((day,index)=>{
 
-  itinerary.forEach((day,index)=>{
+const button=document.createElement("button");
 
-    const button =
-      document.createElement("button");
+button.className="day-pill"+(index===selectedDay?" active":"");
+button.textContent=day.short;
 
-    button.className =
-      "day-pill" +
-      (index===selectedDay ? " active" : "");
+button.onclick=()=>{
+selectedDay=index;
+renderDaySelector();
+renderToday();
+};
 
-    button.textContent=day.short;
+holder.appendChild(button);
 
-    button.onclick=()=>{
-
-      selectedDay=index;
-
-      renderToday();
-      renderDaySelector();
-
-    };
-
-    holder.appendChild(button);
-
-  });
+});
 
 }
 
 
-/* =====================================================
+/* ==========================================================
    TODAY
-   ===================================================== */
+   ========================================================== */
 
 function renderToday(){
 
-  const day=itinerary[selectedDay];
+const day=itinerary[selectedDay];
 
-  document.getElementById("dayTitle")
-    .textContent=day.title;
+document.getElementById("dayTitle").textContent=day.title;
+document.getElementById("daySubtitle").textContent=day.subtitle;
+document.getElementById("bagPlan").textContent=day.luggage;
 
-  document.getElementById("daySubtitle")
-    .textContent=day.subtitle;
+const list=document.getElementById("stopList");
+list.innerHTML="";
 
-  const stopList =
-    document.getElementById("stopList");
+day.stops.forEach((stop,index)=>{
 
-  stopList.innerHTML="";
+const key=`${selectedDay}-${index}`;
+const done=!!completed[key];
 
-  day.stops.forEach((stop,index)=>{
+const card=document.createElement("div");
+card.className="card stop-card"+(done?" done":"");
 
-    const key=`${selectedDay}-${index}`;
-    const isDone=!!completed[key];
+card.innerHTML=`
 
-    const card=document.createElement("div");
+<div class="stop-num">
+${done?"✓":index+1}
+</div>
 
-    card.className=
-      "card stop-card" +
-      (isDone ? " done" : "");
+<div class="stop-content">
 
-    card.innerHTML=`
+<h3>${stop.short}</h3>
+<p>${stop.note}</p>
 
-      <div class="stop-num">
-        ${isDone ? "✓" : index+1}
-      </div>
+<div class="tags">
+<span class="tag">
+${stop.transport.length ? stop.transport.map(x=>x.name).join(" · ") : "Starting point"}
+</span>
+</div>
 
-      <div class="stop-content">
+<div class="actions">
 
-        <h3>${stop.short}</h3>
+<button class="btn btn-primary mapsBtn">
+Google Maps
+</button>
 
-        <p>${stop.note}</p>
+<button class="btn btn-secondary doneBtn">
+${done?"Undo":"Done ✓"}
+</button>
 
-        <div class="tags">
-          <span class="tag">
-            ${stop.transport}
-          </span>
-        </div>
+</div>
 
-        <div class="actions">
+</div>
+`;
 
-          <button
-            class="btn btn-primary nav-stop">
-            Navigate
-          </button>
+card.querySelector(".mapsBtn").onclick=()=>openGoogleMaps(stop);
+card.querySelector(".doneBtn").onclick=()=>toggleComplete(index);
 
-          <button
-            class="btn btn-secondary complete-stop">
-            ${isDone ? "Undo" : "Done"}
-          </button>
+list.appendChild(card);
 
-        </div>
+});
 
-      </div>
-    `;
+const toggle=document.getElementById("luggageToggle");
+toggle.className="switch"+(luggageMode?" on":"");
+toggle.textContent=luggageMode?"ON":"OFF";
 
-    card.querySelector(".nav-stop")
-      .onclick=()=>navigateTo(stop);
-
-    card.querySelector(".complete-stop")
-      .onclick=()=>toggleComplete(index);
-
-    stopList.appendChild(card);
-
-  });
-
-  renderNextStop();
-
-  document.getElementById("luggageToggle")
-    .className=
-      "switch" +
-      (luggageMode ? " on" : "");
-
-  document.getElementById("luggageToggle")
-    .textContent=
-      luggageMode ? "ON" : "OFF";
+renderNextStop();
 
 }
 
 
-/* =====================================================
+/* ==========================================================
+   TRANSPORT CARD
+   ========================================================== */
+
+function buildTransportCard(option,stop){
+
+const div=document.createElement("div");
+
+const luggageBest=
+luggageMode &&
+(option.badge==="LUGGAGE" || option.name.includes("Uber") || option.name.includes("Taxi"));
+
+div.className="transport-card"+(luggageBest?" best":"");
+
+div.innerHTML=`
+
+<div class="transport-head">
+
+<div class="transport-name">
+${option.icon} ${option.name}
+</div>
+
+${option.badge
+? `<span class="transport-badge">${option.badge}</span>`
+: ""}
+
+</div>
+
+<div class="transport-stats">
+
+<div class="stat">
+<small>TIME</small>
+<strong>${option.time}</strong>
+</div>
+
+<div class="stat">
+<small>COST</small>
+<strong>${option.cost}</strong>
+</div>
+
+<div class="stat">
+<small>FARE BASIS</small>
+<strong>${option.per || "—"}</strong>
+</div>
+
+</div>
+
+<p class="transport-note">
+${option.note}
+</p>
+
+<div class="transport-actions"></div>
+
+`;
+
+const actions=div.querySelector(".transport-actions");
+
+if(option.maps){
+
+const b=document.createElement("button");
+b.className="btn btn-blue";
+b.textContent="Google Maps";
+
+b.onclick=()=>openGoogleMaps(stop,option.maps);
+
+actions.appendChild(b);
+
+}
+
+if(option.uber){
+
+const b=document.createElement("button");
+b.className="btn btn-black";
+b.textContent="Open Uber";
+
+b.onclick=()=>openUber(stop);
+
+actions.appendChild(b);
+
+}
+
+return div;
+
+}
+
+
+/* ==========================================================
    NEXT STOP
-   ===================================================== */
+   ========================================================== */
 
 function renderNextStop(){
 
-  const day=itinerary[selectedDay];
+const day=itinerary[selectedDay];
 
-  let nextIndex =
-    day.stops.findIndex((_,index)=>
-      !completed[`${selectedDay}-${index}`]
-    );
+const nextIndex=
+day.stops.findIndex((_,i)=>!completed[`${selectedDay}-${i}`]);
 
-  const holder =
-    document.getElementById("nextStop");
+const holder=document.getElementById("nextStop");
 
-  if(nextIndex===-1){
+if(nextIndex===-1){
 
-    holder.innerHTML=`
-      <div class="next">
-        <div class="next-label">
-          DAY COMPLETE
-        </div>
+holder.innerHTML=`
+<div class="next">
+<div class="next-label">DAY COMPLETE</div>
+<h2>Today's adventure is done ✓</h2>
+<p style="color:#746D68">
+Everything planned for this day has been completed.
+</p>
+</div>
+`;
 
-        <h2>That's today's adventure ✓</h2>
+return;
 
-        <p style="color:#746D68">
-          Everything planned for today has been completed.
-        </p>
-      </div>
-    `;
+}
 
-    return;
-  }
+const stop=day.stops[nextIndex];
+const previous=nextIndex>0 ? day.stops[nextIndex-1] : null;
 
-  const stop=day.stops[nextIndex];
+holder.innerHTML=`
 
-  holder.innerHTML=`
+<div class="next">
 
-    <div class="next">
+<div class="next-label">
+NEXT STOP · ${nextIndex+1}
+</div>
 
-      <div class="next-label">
-        NEXT STOP · ${nextIndex+1}
-      </div>
+<h2>${stop.short}</h2>
 
-      <h2>${stop.short}</h2>
+<div class="route-from">
+${previous
+? `${previous.short} → ${stop.short}`
+: `Start here · ${stop.short}`}
+</div>
 
-      <p style="color:#746D68;margin:0">
-        ${stop.note}
-      </p>
+<p style="color:#746D68;margin:0">
+${stop.note}
+</p>
 
-      <div class="transport-grid">
+<div id="nextTransport" class="transport-options"></div>
 
-        <div class="transport">
-          🚇
-          <strong>Public</strong>
-          Check live route
-        </div>
+<p class="estimate-note">
+Transport fares marked “Est.” are planning estimates, not live quotes.
+Google Maps provides current routing. Uber provides the actual ride price before booking.
+</p>
 
-        <div class="transport">
-          🚕
-          <strong>Taxi / Uber</strong>
-          ${
-            luggageMode
-            ? "Prioritize with luggage"
-            : "Compare time"
-          }
-        </div>
+</div>
+`;
 
-        <div class="transport">
-          🚶
-          <strong>Walk</strong>
-          If practical
-        </div>
+const transportHolder=document.getElementById("nextTransport");
 
-      </div>
+if(!stop.transport.length){
 
-      <button
-        id="nextNavigate"
-        class="btn btn-primary"
-        style="width:100%;margin-top:12px;padding:13px">
-        Open route in Google Maps
-      </button>
+transportHolder.innerHTML=`
+<div class="transport-card">
+<strong>Starting point</strong>
+<p class="transport-note">
+No transport required yet. Mark this stop Done when you're ready to continue.
+</p>
+</div>
+`;
 
-    </div>
-  `;
+}else{
 
-  document.getElementById("nextNavigate")
-    .onclick=()=>navigateTo(stop);
+stop.transport.forEach(option=>{
+transportHolder.appendChild(
+buildTransportCard(option,stop)
+);
+});
+
+}
 
 }
 
 
-/* =====================================================
-   COMPLETE STOPS
-   ===================================================== */
+/* ==========================================================
+   COMPLETED
+   ========================================================== */
 
 function toggleComplete(index){
 
-  const key=`${selectedDay}-${index}`;
+const key=`${selectedDay}-${index}`;
 
-  completed[key]=!completed[key];
+if(completed[key]) delete completed[key];
+else completed[key]=true;
 
-  if(!completed[key]){
-    delete completed[key];
-  }
+localStorage.setItem("taiwanCompleted",JSON.stringify(completed));
 
-  localStorage.setItem(
-    "taiwanCompleted",
-    JSON.stringify(completed)
-  );
+renderToday();
 
-  renderToday();
 }
 
 
-/* =====================================================
-   LUGGAGE MODE
-   ===================================================== */
+/* ==========================================================
+   LUGGAGE
+   ========================================================== */
 
-document.getElementById("luggageToggle")
-.onclick=()=>{
+document.getElementById("luggageToggle").onclick=()=>{
 
-  luggageMode=!luggageMode;
+luggageMode=!luggageMode;
 
-  localStorage.setItem(
-    "taiwanLuggageMode",
-    JSON.stringify(luggageMode)
-  );
+localStorage.setItem(
+"taiwanLuggageMode",
+JSON.stringify(luggageMode)
+);
 
-  renderToday();
+renderToday();
 
 };
 
 
-/* =====================================================
+/* ==========================================================
    FULL ITINERARY
-   ===================================================== */
+   ========================================================== */
 
 function renderFullItinerary(){
 
-  const holder =
-    document.getElementById("fullItinerary");
+const holder=document.getElementById("fullItinerary");
+holder.innerHTML="";
 
-  holder.innerHTML="";
+itinerary.forEach((day,dayIndex)=>{
 
-  itinerary.forEach((day,dayIndex)=>{
+const card=document.createElement("div");
+card.className="card";
 
-    const section=document.createElement("div");
+card.innerHTML=`
 
-    section.innerHTML=`
+<div class="eyebrow">${day.short}</div>
 
-      <div class="card">
+<h2 style="font-family:Georgia,serif;font-weight:500;margin:6px 0">
+${day.title}
+</h2>
 
-        <div class="eyebrow">
-          ${day.short}
-        </div>
+<p style="color:#746D68;margin:0 0 14px">
+${day.subtitle}
+</p>
 
-        <h2 style="
-          font-family:Georgia,serif;
-          margin:6px 0;
-          font-weight:500">
+<div style="background:#F5F1EB;padding:11px;border-radius:13px;font-size:12px;margin-bottom:14px">
+🧳 ${day.luggage}
+</div>
 
-          ${day.title}
+<div class="itineraryStops"></div>
+`;
 
-        </h2>
+const stopHolder=card.querySelector(".itineraryStops");
 
-        <p style="
-          color:#746D68;
-          margin:0 0 14px">
+day.stops.forEach((stop,stopIndex)=>{
 
-          ${day.subtitle}
+const row=document.createElement("div");
 
-        </p>
+row.style.cssText=
+"display:flex;gap:10px;padding:11px 0;border-bottom:1px solid #eee";
 
-        <div style="
-          background:#F5F1EB;
-          padding:11px;
-          border-radius:13px;
-          font-size:12px;
-          margin-bottom:14px">
+row.innerHTML=`
 
-          🧳 ${day.luggage}
+<strong style="color:#5B0015">
+${stopIndex+1}
+</strong>
 
-        </div>
+<div style="flex:1">
 
-        ${day.stops.map((stop,index)=>`
+<strong>${stop.short}</strong>
 
-          <div style="
-            display:flex;
-            gap:10px;
-            padding:10px 0;
-            border-bottom:1px solid #eee">
+<div style="color:#746D68;font-size:12px;margin-top:3px">
+${stop.note}
+</div>
 
-            <strong style="color:#5B0015">
-              ${index+1}
-            </strong>
+<div class="actions">
 
-            <div style="flex:1">
+<button class="btn btn-blue map">
+Google Maps
+</button>
 
-              <strong>
-                ${stop.short}
-              </strong>
+${stop.transport.some(t=>t.uber)
+? `<button class="btn btn-black uber">Uber</button>`
+: ""}
 
-              <div style="
-                color:#746D68;
-                font-size:12px;
-                margin-top:3px">
+</div>
 
-                ${stop.note}
+</div>
+`;
 
-              </div>
+row.querySelector(".map").onclick=()=>openGoogleMaps(stop);
 
-              <button
-                class="btn btn-blue itinerary-nav"
-                data-day="${dayIndex}"
-                data-stop="${index}"
-                style="margin-top:7px">
+const uber=row.querySelector(".uber");
+if(uber) uber.onclick=()=>openUber(stop);
 
-                Google Maps
+stopHolder.appendChild(row);
 
-              </button>
+});
 
-            </div>
+holder.appendChild(card);
 
-          </div>
-
-        `).join("")}
-
-      </div>
-    `;
-
-    holder.appendChild(section);
-
-  });
-
-  document.querySelectorAll(".itinerary-nav")
-    .forEach(button=>{
-
-      button.onclick=()=>{
-
-        const day=
-          Number(button.dataset.day);
-
-        const stop=
-          Number(button.dataset.stop);
-
-        navigateTo(
-          itinerary[day].stops[stop]
-        );
-
-      };
-
-    });
+});
 
 }
 
 
-/* =====================================================
+/* ==========================================================
    MAP
-   ===================================================== */
+   ========================================================== */
 
 function initMap(){
 
-  map=L.map("map").setView(
-    [23.9,121],
-    7
-  );
+map=L.map("map").setView([23.9,121],7);
 
-  L.tileLayer(
-    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    {
-      attribution:"© OpenStreetMap contributors"
-    }
-  ).addTo(map);
+L.tileLayer(
+"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+{attribution:"© OpenStreetMap contributors"}
+).addTo(map);
 
-  renderMapControls();
-  renderMap("all");
+renderMapControls();
+renderMap("all");
 
 }
 
 
 function renderMapControls(){
 
-  const holder=
-    document.getElementById("mapControls");
+const holder=document.getElementById("mapControls");
+holder.innerHTML="";
 
-  holder.innerHTML="";
+const all=document.createElement("button");
+all.className="day-pill active";
+all.textContent="ALL TRIP";
+all.dataset.mapDay="all";
+all.onclick=()=>renderMap("all");
 
-  const all=document.createElement("button");
+holder.appendChild(all);
 
-  all.className="day-pill active";
-  all.textContent="ALL TRIP";
-  all.dataset.mapDay="all";
+itinerary.forEach((day,index)=>{
 
-  all.onclick=()=>renderMap("all");
+const b=document.createElement("button");
+b.className="day-pill";
+b.textContent=day.short;
+b.dataset.mapDay=index;
+b.onclick=()=>renderMap(index);
 
-  holder.appendChild(all);
+holder.appendChild(b);
 
-  itinerary.forEach((day,index)=>{
-
-    const b=document.createElement("button");
-
-    b.className="day-pill";
-    b.textContent=day.short;
-    b.dataset.mapDay=index;
-
-    b.onclick=()=>renderMap(index);
-
-    holder.appendChild(b);
-
-  });
+});
 
 }
 
 
-function renderMap(dayChoice){
+function renderMap(choice){
 
-  if(!map) return;
+if(!map)return;
 
-  if(mapLayer){
-    map.removeLayer(mapLayer);
-  }
+if(mapLayer)map.removeLayer(mapLayer);
 
-  mapLayer=L.layerGroup().addTo(map);
+mapLayer=L.layerGroup().addTo(map);
 
-  const points=[];
+const points=[];
+const days=choice==="all"?itinerary:[itinerary[choice]];
 
-  let days=
-    dayChoice==="all"
-    ? itinerary
-    : [itinerary[dayChoice]];
+days.forEach(day=>{
 
-  days.forEach(day=>{
+const line=[];
 
-    const line=[];
+day.stops.forEach((stop,index)=>{
 
-    day.stops.forEach((stop,index)=>{
+const marker=L.marker([stop.lat,stop.lng]).addTo(mapLayer);
 
-      const marker=L.marker(
-        [stop.lat,stop.lng]
-      ).addTo(mapLayer);
+marker.bindPopup(
+`<strong>${index+1}. ${stop.short}</strong><br>${stop.note}`
+);
 
-      marker.bindPopup(`
-        <strong>${index+1}. ${stop.short}</strong>
-        <br>
-        ${stop.note}
-      `);
+line.push([stop.lat,stop.lng]);
+points.push([stop.lat,stop.lng]);
 
-      line.push([stop.lat,stop.lng]);
-      points.push([stop.lat,stop.lng]);
+});
 
-    });
+if(line.length>1){
+L.polyline(line,{weight:3,opacity:.6}).addTo(mapLayer);
+}
 
-    if(line.length>1){
+});
 
-      L.polyline(
-        line,
-        {
-          weight:3,
-          opacity:.65
-        }
-      ).addTo(mapLayer);
+if(points.length){
+map.fitBounds(points,{padding:[25,25]});
+}
 
-    }
-
-  });
-
-  if(points.length){
-
-    map.fitBounds(
-      points,
-      {
-        padding:[25,25]
-      }
-    );
-
-  }
-
-  document.querySelectorAll(
-    "[data-map-day]"
-  ).forEach(btn=>{
-
-    btn.classList.toggle(
-      "active",
-      String(btn.dataset.mapDay)
-      ===String(dayChoice)
-    );
-
-  });
+document.querySelectorAll("[data-map-day]").forEach(btn=>{
+btn.classList.toggle(
+"active",
+String(btn.dataset.mapDay)===String(choice)
+);
+});
 
 }
 
 
-/* =====================================================
-   CURRENT LOCATION
-   ===================================================== */
+/* ==========================================================
+   GPS
+   ========================================================== */
 
 function locateMe(){
 
-  if(!navigator.geolocation){
+if(!navigator.geolocation){
+alert("Location services aren't available.");
+return;
+}
 
-    alert(
-      "Location services are not available in this browser."
-    );
+navigator.geolocation.getCurrentPosition(
 
-    return;
-  }
+pos=>{
 
-  navigator.geolocation.getCurrentPosition(
+const lat=pos.coords.latitude;
+const lng=pos.coords.longitude;
 
-    position=>{
+if(userMarker)map.removeLayer(userMarker);
 
-      const lat=
-        position.coords.latitude;
+userMarker=L.circleMarker(
+[lat,lng],
+{radius:9,weight:4,fillOpacity:1}
+).addTo(map);
 
-      const lng=
-        position.coords.longitude;
+userMarker.bindPopup("You are here").openPopup();
 
-      if(userMarker){
-        map.removeLayer(userMarker);
-      }
+map.setView([lat,lng],15);
 
-      userMarker=L.circleMarker(
-        [lat,lng],
-        {
-          radius:9,
-          weight:4,
-          fillOpacity:1
-        }
-      ).addTo(map);
+},
 
-      userMarker.bindPopup(
-        "You are here"
-      ).openPopup();
+()=>{
+alert("Allow location access to show your position.");
+},
 
-      map.setView(
-        [lat,lng],
-        15
-      );
+{enableHighAccuracy:true,timeout:10000}
 
-    },
-
-    ()=>{
-
-      alert(
-        "Please allow location access so the trip map can show where you are."
-      );
-
-    },
-
-    {
-      enableHighAccuracy:true,
-      timeout:10000
-    }
-
-  );
+);
 
 }
 
 
-/* =====================================================
-   WALLET
-   ===================================================== */
+/* ==========================================================
+   EXPENSES
+   ========================================================== */
 
 function openExpense(){
-
-  document.getElementById(
-    "expenseDialog"
-  ).showModal();
-
+document.getElementById("expenseDialog").showModal();
 }
 
 
 function saveExpense(){
 
-  const amount=
-    Number(
-      document.getElementById(
-        "expenseAmount"
-      ).value
-    );
+const amount=Number(document.getElementById("expenseAmount").value);
 
-  if(!amount || amount<=0){
+if(!amount||amount<=0){
+alert("Enter the expense amount in NT$.");
+return;
+}
 
-    alert(
-      "Enter the expense amount in NT$."
-    );
+const expense={
 
-    return;
-  }
+id:Date.now(),
+amount,
 
-  const expense={
+description:
+document.getElementById("expenseDescription").value.trim()||"Trip expense",
 
-    id:Date.now(),
+category:
+document.getElementById("expenseCategory").value,
 
-    amount,
+paidBy:
+document.getElementById("expensePaidBy").value,
 
-    description:
-      document.getElementById(
-        "expenseDescription"
-      ).value.trim()
-      || "Trip expense",
+method:
+document.getElementById("expenseMethod").value,
 
-    category:
-      document.getElementById(
-        "expenseCategory"
-      ).value,
+createdAt:new Date().toISOString()
 
-    paidBy:
-      document.getElementById(
-        "expensePaidBy"
-      ).value,
+};
 
-    method:
-      document.getElementById(
-        "expenseMethod"
-      ).value,
+expenses.unshift(expense);
 
-    createdAt:
-      new Date().toISOString()
+localStorage.setItem(
+"taiwanExpenses",
+JSON.stringify(expenses)
+);
 
-  };
+document.getElementById("expenseAmount").value="";
+document.getElementById("expenseDescription").value="";
 
-  expenses.unshift(expense);
+document.getElementById("expenseDialog").close();
 
-  localStorage.setItem(
-    "taiwanExpenses",
-    JSON.stringify(expenses)
-  );
-
-  document.getElementById(
-    "expenseAmount"
-  ).value="";
-
-  document.getElementById(
-    "expenseDescription"
-  ).value="";
-
-  document.getElementById(
-    "expenseDialog"
-  ).close();
-
-  renderWallet();
+renderWallet();
 
 }
 
 
 function deleteExpense(id){
 
-  if(!confirm("Delete this expense?")){
-    return;
-  }
+if(!confirm("Delete this expense?"))return;
 
-  expenses=
-    expenses.filter(
-      expense=>expense.id!==id
-    );
+expenses=expenses.filter(e=>e.id!==id);
 
-  localStorage.setItem(
-    "taiwanExpenses",
-    JSON.stringify(expenses)
-  );
+localStorage.setItem(
+"taiwanExpenses",
+JSON.stringify(expenses)
+);
 
-  renderWallet();
+renderWallet();
 
 }
 
 
 function renderWallet(){
 
-  const totalTWD=
-    expenses.reduce(
-      (sum,e)=>sum+Number(e.amount),
-      0
-    );
+const totalTWD=
+expenses.reduce((sum,e)=>sum+Number(e.amount),0);
 
-  const totalPHP=
-    totalTWD*PHP_PER_TWD;
+const totalPHP=totalTWD*PHP_PER_TWD;
 
-  const remainingPHP=
-    Math.max(
-      0,
-      TRIP_BUDGET_PHP-totalPHP
-    );
+const remainingPHP=
+Math.max(0,TRIP_BUDGET_PHP-totalPHP);
 
-  const cashSpent=
-    expenses
-      .filter(e=>e.method==="Cash")
-      .reduce(
-        (sum,e)=>sum+Number(e.amount),
-        0
-      );
+const cashSpent=
+expenses
+.filter(e=>e.method==="Cash")
+.reduce((sum,e)=>sum+Number(e.amount),0);
 
-  const cashRemaining=
-    STARTING_CASH_TWD-cashSpent;
+const cashRemaining=
+STARTING_CASH_TWD-cashSpent;
 
-  document.getElementById(
-    "spentTWD"
-  ).textContent=
-    `NT$${totalTWD.toLocaleString()}`;
+document.getElementById("spentTWD").textContent=
+`NT$${totalTWD.toLocaleString()}`;
 
-  document.getElementById(
-    "spentPHP"
-  ).textContent=
-    `₱${Math.round(totalPHP).toLocaleString()}`;
+document.getElementById("spentPHP").textContent=
+`₱${Math.round(totalPHP).toLocaleString()}`;
 
-  document.getElementById(
-    "remainingPHP"
-  ).textContent=
-    `₱${Math.round(remainingPHP).toLocaleString()}`;
+document.getElementById("remainingPHP").textContent=
+`₱${Math.round(remainingPHP).toLocaleString()}`;
 
-  document.getElementById(
-    "cashRemaining"
-  ).textContent=
-    `NT$${Math.max(0,cashRemaining).toLocaleString()}`;
+document.getElementById("cashRemaining").textContent=
+`NT$${Math.max(0,cashRemaining).toLocaleString()}`;
 
-  document.getElementById(
-    "expenseCount"
-  ).textContent=
-    expenses.length;
+document.getElementById("expenseCount").textContent=
+expenses.length;
 
-  const holder=
-    document.getElementById(
-      "expenseList"
-    );
+const holder=document.getElementById("expenseList");
 
-  if(!expenses.length){
+if(!expenses.length){
 
-    holder.innerHTML=`
-      <div style="
-        text-align:center;
-        padding:24px;
-        color:#746D68">
+holder.innerHTML=`
+<div style="text-align:center;padding:24px;color:#746D68">
+No expenses yet.<br>
+Your first Taiwan purchase will appear here.
+</div>
+`;
 
-        No expenses yet.<br>
-        Your first Taiwan purchase will appear here.
-
-      </div>
-    `;
-
-    return;
-  }
-
-  holder.innerHTML=
-    expenses.map(expense=>`
-
-      <div class="expense-row">
-
-        <div class="expense-info">
-
-          <strong>
-            ${escapeHTML(expense.description)}
-          </strong>
-
-          <small>
-            ${expense.category}
-            · ${expense.paidBy}
-            · ${expense.method}
-          </small>
-
-        </div>
-
-        <div class="expense-amount">
-
-          NT$${Number(expense.amount).toLocaleString()}
-
-          <div style="
-            color:#999;
-            font-size:10px;
-            margin-top:4px">
-
-            ≈ ₱${Math.round(
-              expense.amount*PHP_PER_TWD
-            ).toLocaleString()}
-
-          </div>
-
-          <button
-            onclick="deleteExpense(${expense.id})"
-            style="
-              border:0;
-              background:none;
-              color:#A55;
-              font-size:10px;
-              margin-top:5px">
-
-            delete
-
-          </button>
-
-        </div>
-
-      </div>
-
-    `).join("");
+return;
 
 }
 
+holder.innerHTML=expenses.map(e=>`
 
-/* =====================================================
-   BASIC HTML ESCAPE
-   ===================================================== */
+<div class="expense-row">
+
+<div class="expense-info">
+
+<strong>
+${escapeHTML(e.description)}
+</strong>
+
+<small>
+${e.category} · ${e.paidBy} · ${e.method}
+</small>
+
+</div>
+
+<div class="expense-amount">
+
+NT$${Number(e.amount).toLocaleString()}
+
+<div style="color:#999;font-size:10px;margin-top:4px">
+≈ ₱${Math.round(e.amount*PHP_PER_TWD).toLocaleString()}
+</div>
+
+<button
+onclick="deleteExpense(${e.id})"
+style="border:0;background:none;color:#A55;font-size:10px;margin-top:5px">
+delete
+</button>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
 
 function escapeHTML(value){
 
-  return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+return String(value)
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 
 }
 
 
-/* =====================================================
-   NAVIGATION
-   ===================================================== */
+/* ==========================================================
+   BOTTOM NAV
+   ========================================================== */
 
-document.querySelectorAll(".nav-btn")
-.forEach(button=>{
+document.querySelectorAll(".nav-btn").forEach(button=>{
 
-  button.onclick=()=>{
+button.onclick=()=>{
 
-    document.querySelectorAll(
-      ".screen"
-    ).forEach(screen=>
-      screen.classList.remove("active")
-    );
+document.querySelectorAll(".screen").forEach(s=>
+s.classList.remove("active")
+);
 
-    document.querySelectorAll(
-      ".nav-btn"
-    ).forEach(btn=>
-      btn.classList.remove("active")
-    );
+document.querySelectorAll(".nav-btn").forEach(b=>
+b.classList.remove("active")
+);
 
-    document.getElementById(
-      button.dataset.screen
-    ).classList.add("active");
+document.getElementById(
+button.dataset.screen
+).classList.add("active");
 
-    button.classList.add("active");
+button.classList.add("active");
 
-    if(
-      button.dataset.screen==="mapScreen"
-    ){
+if(button.dataset.screen==="mapScreen"){
 
-      setTimeout(()=>{
+setTimeout(()=>{
 
-        if(!map){
-          initMap();
-        }
-        else{
-          map.invalidateSize();
-        }
+if(!map)initMap();
+else map.invalidateSize();
 
-      },100);
+},100);
 
-    }
+}
 
-    if(
-      button.dataset.screen==="wallet"
-    ){
-      renderWallet();
-    }
+if(button.dataset.screen==="wallet"){
+renderWallet();
+}
 
-  };
+};
 
 });
 
 
-/* =====================================================
-   INITIALIZE
-   ===================================================== */
+/* ==========================================================
+   INIT
+   ========================================================== */
 
 renderCountdown();
 renderDaySelector();
