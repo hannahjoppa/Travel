@@ -1,0 +1,2210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#F7F2E0">
+
+<title>Mikeila XVIII — Taiwan Trip Companion</title>
+
+<!-- Leaflet -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+<style>
+:root{
+  --burgundy:#5B0015;
+  --burgundy2:#7B2940;
+  --ivory:#F7F2E0;
+  --blue:#80AEE8;
+  --ink:#191615;
+  --muted:#746D68;
+  --line:#E5DDD2;
+  --white:#fff;
+  --green:#27784A;
+  --orange:#A96016;
+  --shadow:0 12px 35px rgba(55,35,30,.09);
+}
+
+*{box-sizing:border-box}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:var(--ivory);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",
+  "Segoe UI",sans-serif;
+  padding-bottom:100px;
+}
+
+button,input,select,textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* HEADER */
+
+header{
+  padding:
+  calc(18px + env(safe-area-inset-top))
+  18px 15px;
+  background:rgba(247,242,224,.92);
+  backdrop-filter:blur(20px);
+  position:sticky;
+  top:0;
+  z-index:800;
+  border-bottom:1px solid rgba(91,0,21,.08);
+}
+
+.brand{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  max-width:850px;
+  margin:auto;
+}
+
+.brand-title{
+  font-weight:900;
+  letter-spacing:-.03em;
+}
+
+.brand-title span{
+  color:var(--burgundy);
+}
+
+.brand small{
+  color:var(--muted);
+}
+
+/* MAIN */
+
+main{
+  max-width:850px;
+  margin:auto;
+  padding:18px 16px 40px;
+}
+
+.screen{
+  display:none;
+}
+
+.screen.active{
+  display:block;
+}
+
+/* HERO */
+
+.hero{
+  background:
+  linear-gradient(145deg,var(--burgundy),#821D38);
+  color:white;
+  border-radius:30px;
+  padding:28px 24px;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+
+.hero:after{
+  content:"XVIII";
+  position:absolute;
+  right:-15px;
+  bottom:-25px;
+  font-family:Georgia,serif;
+  font-size:115px;
+  opacity:.06;
+}
+
+.eyebrow{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-weight:900;
+  color:var(--blue);
+}
+
+.hero h1{
+  font-family:Georgia,serif;
+  font-weight:500;
+  font-size:42px;
+  line-height:.95;
+  margin:12px 0;
+}
+
+.hero p{
+  margin:0;
+  color:#E8DDE0;
+  line-height:1.5;
+}
+
+.trip-countdown{
+  margin-top:22px;
+  display:inline-flex;
+  padding:9px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.12);
+  font-size:12px;
+  font-weight:800;
+}
+
+/* DAY SELECTOR */
+
+.day-scroll{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:18px 1px 8px;
+  scrollbar-width:none;
+}
+
+.day-scroll::-webkit-scrollbar{display:none}
+
+.day-pill{
+  white-space:nowrap;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:999px;
+  padding:10px 14px;
+  font-size:12px;
+  font-weight:800;
+  color:var(--muted);
+}
+
+.day-pill.active{
+  background:var(--burgundy);
+  color:#fff;
+  border-color:var(--burgundy);
+}
+
+/* SECTION */
+
+.section-title{
+  margin:27px 2px 13px;
+}
+
+.section-title h2{
+  font-family:Georgia,serif;
+  font-weight:500;
+  font-size:28px;
+  margin:5px 0;
+}
+
+.section-title p{
+  color:var(--muted);
+  margin:0;
+  font-size:14px;
+}
+
+/* CARDS */
+
+.card{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:23px;
+  padding:18px;
+  margin-bottom:12px;
+  box-shadow:0 6px 18px rgba(30,20,10,.03);
+}
+
+.stop-card{
+  display:grid;
+  grid-template-columns:44px 1fr;
+  gap:13px;
+}
+
+.stop-num{
+  width:40px;
+  height:40px;
+  background:var(--burgundy);
+  color:#fff;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+}
+
+.stop-card.done{
+  opacity:.55;
+}
+
+.stop-card.done .stop-num{
+  background:var(--green);
+}
+
+.stop-content h3{
+  margin:2px 0 5px;
+  font-size:17px;
+}
+
+.stop-content p{
+  color:var(--muted);
+  margin:0;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:10px;
+}
+
+.tag{
+  font-size:10px;
+  font-weight:800;
+  background:#F4F1EC;
+  padding:6px 8px;
+  border-radius:999px;
+  color:#625A55;
+}
+
+.actions{
+  display:flex;
+  gap:7px;
+  margin-top:13px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  border:0;
+  border-radius:13px;
+  padding:10px 13px;
+  font-size:12px;
+  font-weight:850;
+}
+
+.btn-primary{
+  background:var(--burgundy);
+  color:white;
+}
+
+.btn-secondary{
+  background:#F0ECE6;
+  color:var(--ink);
+}
+
+.btn-blue{
+  background:#E7F0FB;
+  color:#245783;
+}
+
+.btn-green{
+  background:#E7F4EC;
+  color:var(--green);
+}
+
+/* NEXT CARD */
+
+.next{
+  background:#fff;
+  border:2px solid var(--blue);
+  border-radius:26px;
+  padding:20px;
+  margin-top:16px;
+}
+
+.next-label{
+  color:#3674B4;
+  font-size:10px;
+  letter-spacing:.16em;
+  font-weight:900;
+}
+
+.next h2{
+  margin:7px 0;
+  font-size:25px;
+}
+
+.transport-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+  margin-top:14px;
+}
+
+.transport{
+  padding:11px 8px;
+  background:#F6F4F0;
+  border-radius:14px;
+  text-align:center;
+  font-size:11px;
+}
+
+.transport strong{
+  display:block;
+  font-size:13px;
+  margin:4px 0;
+}
+
+/* MAP */
+
+#map{
+  height:60vh;
+  min-height:440px;
+  border-radius:25px;
+  overflow:hidden;
+  border:1px solid var(--line);
+}
+
+.map-controls{
+  display:flex;
+  overflow-x:auto;
+  gap:7px;
+  margin-bottom:12px;
+}
+
+/* LUGGAGE */
+
+.luggage-banner{
+  background:#171515;
+  color:white;
+  padding:17px;
+  border-radius:20px;
+  margin:15px 0;
+}
+
+.luggage-top{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:center;
+}
+
+.switch{
+  border:0;
+  background:#444;
+  color:white;
+  padding:9px 12px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:900;
+}
+
+.switch.on{
+  background:var(--blue);
+  color:#111;
+}
+
+/* WALLET */
+
+.balance-card{
+  background:var(--burgundy);
+  color:#fff;
+  padding:24px;
+  border-radius:27px;
+}
+
+.balance-label{
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  opacity:.7;
+}
+
+.balance{
+  font-size:44px;
+  font-weight:900;
+  letter-spacing:-.05em;
+  margin:5px 0;
+}
+
+.balance-sub{
+  color:#E3CED4;
+  font-size:13px;
+}
+
+.wallet-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:10px;
+}
+
+.metric{
+  background:white;
+  border:1px solid var(--line);
+  padding:16px;
+  border-radius:18px;
+}
+
+.metric small{
+  color:var(--muted);
+}
+
+.metric strong{
+  display:block;
+  margin-top:4px;
+  font-size:20px;
+}
+
+.expense-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  border-bottom:1px solid var(--line);
+  padding:13px 0;
+}
+
+.expense-row:last-child{
+  border:0;
+}
+
+.expense-info strong{
+  display:block;
+}
+
+.expense-info small{
+  color:var(--muted);
+}
+
+.expense-amount{
+  text-align:right;
+  font-weight:850;
+}
+
+/* FOOD */
+
+.food-hero{
+  background:linear-gradient(140deg,#171515,#423634);
+  color:white;
+  border-radius:28px;
+  padding:25px;
+}
+
+.food-options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:14px;
+}
+
+.food-btn{
+  background:white;
+  color:#191615;
+  border:0;
+  border-radius:17px;
+  padding:16px 12px;
+  text-align:left;
+  font-weight:800;
+}
+
+/* NAV */
+
+.bottom-nav{
+  position:fixed;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:calc(10px + env(safe-area-inset-bottom));
+  width:min(94%,620px);
+  z-index:1000;
+  background:rgba(22,20,20,.93);
+  backdrop-filter:blur(20px);
+  border-radius:23px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  padding:6px;
+  box-shadow:0 15px 45px rgba(0,0,0,.25);
+}
+
+.nav-btn{
+  border:0;
+  background:none;
+  color:#999;
+  padding:10px 3px;
+  font-size:10px;
+  font-weight:800;
+}
+
+.nav-btn span{
+  display:block;
+  font-size:20px;
+  margin-bottom:3px;
+}
+
+.nav-btn.active{
+  color:white;
+}
+
+/* FLOATING */
+
+.fab{
+  position:fixed;
+  right:18px;
+  bottom:100px;
+  z-index:900;
+  width:52px;
+  height:52px;
+  border:0;
+  border-radius:50%;
+  background:var(--burgundy);
+  color:white;
+  font-size:27px;
+  box-shadow:0 12px 30px rgba(91,0,21,.3);
+}
+
+/* MODAL */
+
+dialog{
+  border:0;
+  border-radius:28px;
+  width:min(520px,calc(100% - 24px));
+  padding:0;
+  background:var(--ivory);
+}
+
+dialog::backdrop{
+  background:rgba(0,0,0,.62);
+  backdrop-filter:blur(6px);
+}
+
+.modal{
+  padding:23px;
+}
+
+.modal h2{
+  font-family:Georgia,serif;
+  font-weight:500;
+  margin-top:4px;
+}
+
+.field{
+  margin:12px 0;
+}
+
+.field label{
+  display:block;
+  font-size:11px;
+  font-weight:850;
+  color:var(--muted);
+  margin-bottom:5px;
+}
+
+.field input,
+.field select{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:13px;
+  background:white;
+}
+
+.modal-actions{
+  display:grid;
+  grid-template-columns:1fr 2fr;
+  gap:8px;
+  margin-top:18px;
+}
+
+@media(max-width:500px){
+  .hero h1{font-size:37px}
+  .transport-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">
+    <div>
+      <div class="brand-title">🇹🇼 <span>MIKEILA XVIII</span></div>
+      <small>Taiwan Trip Companion</small>
+    </div>
+    <small>17–21 DEC 2026</small>
+  </div>
+</header>
+
+<main>
+
+<!-- TODAY -->
+
+<section id="today" class="screen active">
+
+  <div class="hero">
+    <div class="eyebrow">Taiwan · 2026</div>
+    <h1>Five days.<br>One big adventure.</h1>
+    <p>Hannah · Patrick · Mikeila</p>
+    <div id="countdown" class="trip-countdown">Loading trip countdown…</div>
+  </div>
+
+  <div id="daySelector" class="day-scroll"></div>
+
+  <div id="nextStop"></div>
+
+  <div class="luggage-banner">
+    <div class="luggage-top">
+      <div>
+        <strong>🧳 Luggage Mode</strong>
+        <div style="font-size:12px;color:#aaa;margin-top:3px">
+          Prioritize easier routes with bags.
+        </div>
+      </div>
+      <button id="luggageToggle" class="switch">OFF</button>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <div class="eyebrow">Today's route</div>
+    <h2 id="dayTitle"></h2>
+    <p id="daySubtitle"></p>
+  </div>
+
+  <div id="stopList"></div>
+
+  <div class="section-title">
+    <div class="eyebrow">Hungry?</div>
+    <h2>Eat near where you are.</h2>
+  </div>
+
+  <button class="btn btn-primary"
+          style="width:100%;padding:15px"
+          onclick="openFoodNearMe()">
+    🍜 Find food near me
+  </button>
+
+</section>
+
+
+<!-- ITINERARY -->
+
+<section id="itinerary" class="screen">
+
+  <div class="section-title">
+    <div class="eyebrow">December 17–21</div>
+    <h2>The whole adventure.</h2>
+    <p>Tap a day to see its stops and navigate.</p>
+  </div>
+
+  <div id="fullItinerary"></div>
+
+</section>
+
+
+<!-- MAP -->
+
+<section id="mapScreen" class="screen">
+
+  <div class="section-title">
+    <div class="eyebrow">Live trip map</div>
+    <h2>Where are we going next?</h2>
+    <p>Numbers show the order of each day's stops.</p>
+  </div>
+
+  <div id="mapControls" class="map-controls"></div>
+  <div id="map"></div>
+
+  <button
+    class="btn btn-blue"
+    style="width:100%;margin-top:10px;padding:14px"
+    onclick="locateMe()">
+    ◎ Show my current location
+  </button>
+
+</section>
+
+
+<!-- WALLET -->
+
+<section id="wallet" class="screen">
+
+  <div class="section-title">
+    <div class="eyebrow">Shared trip wallet</div>
+    <h2>What have we spent?</h2>
+  </div>
+
+  <div class="balance-card">
+    <div class="balance-label">Remaining Trip Budget</div>
+    <div class="balance" id="remainingPHP">₱50,000</div>
+    <div class="balance-sub" id="walletSub">
+      Budget ₱50,000 · Expenses entered in TWD
+    </div>
+  </div>
+
+  <div class="wallet-grid">
+    <div class="metric">
+      <small>Total spent</small>
+      <strong id="spentTWD">NT$0</strong>
+    </div>
+
+    <div class="metric">
+      <small>PHP equivalent</small>
+      <strong id="spentPHP">₱0</strong>
+    </div>
+
+    <div class="metric">
+      <small>Cash remaining</small>
+      <strong id="cashRemaining">NT$5,000</strong>
+    </div>
+
+    <div class="metric">
+      <small>Expenses</small>
+      <strong id="expenseCount">0</strong>
+    </div>
+  </div>
+
+  <button
+    class="btn btn-primary"
+    style="width:100%;margin-top:12px;padding:14px"
+    onclick="openExpense()">
+    + Add expense
+  </button>
+
+  <div class="section-title">
+    <div class="eyebrow">Activity</div>
+    <h2>Recent spending</h2>
+  </div>
+
+  <div class="card" id="expenseList"></div>
+
+</section>
+
+</main>
+
+
+<!-- NAV -->
+
+<nav class="bottom-nav">
+
+  <button class="nav-btn active" data-screen="today">
+    <span>⌂</span>
+    Today
+  </button>
+
+  <button class="nav-btn" data-screen="itinerary">
+    <span>☷</span>
+    Itinerary
+  </button>
+
+  <button class="nav-btn" data-screen="mapScreen">
+    <span>⌖</span>
+    Map
+  </button>
+
+  <button class="nav-btn" data-screen="wallet">
+    <span>₱</span>
+    Wallet
+  </button>
+
+</nav>
+
+<button class="fab" onclick="openExpense()">+</button>
+
+
+<!-- EXPENSE MODAL -->
+
+<dialog id="expenseDialog">
+
+<div class="modal">
+
+  <div class="eyebrow">Trip wallet</div>
+  <h2>Add an expense</h2>
+
+  <div class="field">
+    <label>AMOUNT · NT$</label>
+    <input id="expenseAmount"
+           type="number"
+           inputmode="decimal"
+           placeholder="320">
+  </div>
+
+  <div class="field">
+    <label>DESCRIPTION</label>
+    <input id="expenseDescription"
+           placeholder="Beef noodles">
+  </div>
+
+  <div class="field">
+    <label>CATEGORY</label>
+    <select id="expenseCategory">
+      <option>Food</option>
+      <option>Transport</option>
+      <option>Shopping</option>
+      <option>Pasalubong</option>
+      <option>Mikeila</option>
+      <option>Attractions</option>
+      <option>Miscellaneous</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>PAID BY</label>
+    <select id="expensePaidBy">
+      <option>Hannah</option>
+      <option>Patrick</option>
+      <option>Mikeila</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>PAYMENT METHOD</label>
+    <select id="expenseMethod">
+      <option>Cash</option>
+      <option>GoTyme / Apple Pay</option>
+      <option>Debit / Credit Card</option>
+      <option>Other</option>
+    </select>
+  </div>
+
+  <div class="modal-actions">
+    <button
+      class="btn btn-secondary"
+      onclick="expenseDialog.close()">
+      Cancel
+    </button>
+
+    <button
+      class="btn btn-primary"
+      onclick="saveExpense()">
+      Save expense
+    </button>
+  </div>
+
+</div>
+
+</dialog>
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+
+/* =====================================================
+   MIKEILA XVIII — TAIWAN TRIP COMPANION V1
+   ===================================================== */
+
+const TRIP_BUDGET_PHP = 50000;
+const STARTING_CASH_TWD = 5000;
+
+/*
+ Temporary planning FX rate.
+ Change this before the trip to the rate you want
+ to use for budget tracking.
+*/
+const PHP_PER_TWD = 1.80;
+
+
+/* =====================================================
+   ITINERARY DATA
+   ===================================================== */
+
+const itinerary = [
+
+{
+  date:"2026-12-17",
+  short:"DEC 17",
+  title:"Hello, Taiwan",
+  subtitle:"Arrive gently · Zhongshan",
+  luggage:"Full luggage until hotel check-in.",
+  stops:[
+
+    {
+      name:"Taiwan Taoyuan International Airport",
+      short:"TPE Airport",
+      lat:25.0797,
+      lng:121.2342,
+      note:"Arrival in Taiwan.",
+      transport:"Airport transfer"
+    },
+
+    {
+      name:"HUB Hotel Songshan Inn",
+      search:"HUB Hotel Songshan Inn Taipei 485 Songjiang Road",
+      short:"Songshan HUB",
+      lat:25.068,
+      lng:121.533,
+      note:"Drop luggage and settle in.",
+      transport:"Bus / Taxi / Private transfer"
+    },
+
+    {
+      name:"Xinsheng Park",
+      short:"Xinsheng Park",
+      lat:25.0707,
+      lng:121.5306,
+      note:"Easy first walk in Taipei.",
+      transport:"Walk / Bus"
+    },
+
+    {
+      name:"Zhongshan District Taipei",
+      short:"Zhongshan",
+      lat:25.064,
+      lng:121.525,
+      note:"Cafés, local streets and dinner.",
+      transport:"Walk"
+    }
+  ]
+},
+
+{
+  date:"2026-12-18",
+  short:"DEC 18",
+  title:"Discover Taipei",
+  subtitle:"The big Taipei day",
+  luggage:"Leave all luggage at HUB Hotel.",
+  stops:[
+
+    {
+      name:"Dadaocheng Taipei",
+      short:"Dadaocheng",
+      lat:25.0567,
+      lng:121.5083,
+      note:"Old Taipei streets and atmosphere.",
+      transport:"MRT / Bus"
+    },
+
+    {
+      name:"Ximending",
+      short:"Ximending",
+      lat:25.0422,
+      lng:121.5077,
+      note:"Energetic Taipei district.",
+      transport:"MRT / Sightseeing bus"
+    },
+
+    {
+      name:"Chiang Kai-shek Memorial Hall",
+      short:"CKS Memorial Hall",
+      lat:25.0346,
+      lng:121.5218,
+      note:"Plaza, gardens and architecture.",
+      transport:"MRT / Sightseeing bus"
+    },
+
+    {
+      name:"Songshan Cultural and Creative Park",
+      short:"Songshan Creative Park",
+      lat:25.0437,
+      lng:121.5606,
+      note:"Creative spaces and design.",
+      transport:"MRT / Bus"
+    },
+
+    {
+      name:"Taipei 101",
+      short:"Taipei 101",
+      lat:25.0339,
+      lng:121.5645,
+      note:"Xinyi exploration and iconic Taipei photos.",
+      transport:"MRT / Bus"
+    },
+
+    {
+      name:"Tao Zhu Yin Yuan Taipei",
+      short:"Twisted Building",
+      lat:25.0317,
+      lng:121.5669,
+      note:"Photo stop for the twisted building.",
+      transport:"Walk"
+    },
+
+    {
+      name:"Raohe Street Night Market",
+      short:"Raohe",
+      lat:25.0509,
+      lng:121.5775,
+      note:"Evening food exploration.",
+      transport:"MRT / Bus"
+    }
+  ]
+},
+
+{
+  date:"2026-12-19",
+  short:"DEC 19",
+  title:"Adventure",
+  subtitle:"HSR · Alishan · Chiayi",
+  luggage:"Store large luggage in Chiayi. Bring day bags to Alishan.",
+  stops:[
+
+    {
+      name:"HUB Hotel Songshan Inn",
+      short:"Songshan HUB",
+      lat:25.068,
+      lng:121.533,
+      note:"Early checkout.",
+      transport:"Taxi / MRT"
+    },
+
+    {
+      name:"Taipei Main Station",
+      short:"Taipei Main",
+      lat:25.0478,
+      lng:121.5170,
+      note:"Board HSR to Chiayi.",
+      transport:"MRT / Taxi"
+    },
+
+    {
+      name:"THSR Chiayi Station",
+      short:"Chiayi HSR",
+      lat:23.4593,
+      lng:120.3233,
+      note:"Store large luggage before Alishan.",
+      transport:"HSR"
+    },
+
+    {
+      name:"Alishan National Forest Recreation Area",
+      short:"Alishan",
+      lat:23.5102,
+      lng:120.8013,
+      note:"Around 4 hours: forest railway, Zhaoping and forest walks.",
+      transport:"Taiwan Tourist Shuttle / Car"
+    },
+
+    {
+      name:"Chiayi City",
+      short:"Chiayi",
+      lat:23.4801,
+      lng:120.4491,
+      note:"Hotel check-in and relaxed evening.",
+      transport:"Bus / Taxi"
+    }
+  ]
+},
+
+{
+  date:"2026-12-20",
+  short:"DEC 20",
+  title:"Celebrate",
+  subtitle:"Meteor Garden · Shopping · Birthday finale",
+  luggage:"Leave suitcases at Chiayi hotel during CCU visit.",
+  stops:[
+
+    {
+      name:"Chiayi City",
+      short:"Chiayi Hotel",
+      lat:23.4801,
+      lng:120.4491,
+      note:"Check out but ask hotel to hold luggage.",
+      transport:"Taxi"
+    },
+
+    {
+      name:"National Chung Cheng University",
+      short:"CCU · Meteor Garden",
+      lat:23.5615,
+      lng:120.4727,
+      note:"Meteor Garden filming locations. Allow 2–3 hours.",
+      transport:"Taxi recommended"
+    },
+
+    {
+      name:"THSR Chiayi Station",
+      short:"Chiayi HSR",
+      lat:23.4593,
+      lng:120.3233,
+      note:"Travel north after collecting luggage.",
+      transport:"Taxi + HSR"
+    },
+
+    {
+      name:"Taipei Main Station",
+      short:"Taipei",
+      lat:25.0478,
+      lng:121.5170,
+      note:"Final Taipei shopping / luggage strategy.",
+      transport:"HSR"
+    },
+
+    {
+      name:"Din Tai Fung Taipei",
+      short:"Din Tai Fung",
+      lat:25.0339,
+      lng:121.5645,
+      note:"Mikeila's birthday finale meal.",
+      transport:"MRT / Taxi"
+    },
+
+    {
+      name:"Holiday Inn Taoyuan Airport",
+      short:"Holiday Inn",
+      lat:25.063,
+      lng:121.196,
+      note:"Final night near the airport.",
+      transport:"Airport MRT + Taxi / Taxi"
+    }
+  ]
+},
+
+{
+  date:"2026-12-21",
+  short:"DEC 21",
+  title:"Home",
+  subtitle:"Easy departure · Manila",
+  luggage:"All luggage with you.",
+  stops:[
+
+    {
+      name:"Holiday Inn Taoyuan Airport",
+      short:"Holiday Inn",
+      lat:25.063,
+      lng:121.196,
+      note:"Check out early.",
+      transport:"Hotel transfer"
+    },
+
+    {
+      name:"Taiwan Taoyuan International Airport",
+      short:"TPE Airport",
+      lat:25.0797,
+      lng:121.2342,
+      note:"Target arrival around 7:00 AM for the 10:00 AM flight.",
+      transport:"Hotel airport transfer"
+    }
+  ]
+}
+
+];
+
+
+/* =====================================================
+   STATE
+   ===================================================== */
+
+let selectedDay = 0;
+let luggageMode =
+  JSON.parse(localStorage.getItem("taiwanLuggageMode") || "false");
+
+let completed =
+  JSON.parse(localStorage.getItem("taiwanCompleted") || "{}");
+
+let expenses =
+  JSON.parse(localStorage.getItem("taiwanExpenses") || "[]");
+
+let map;
+let mapLayer;
+let userMarker;
+
+
+/* =====================================================
+   COUNTDOWN
+   ===================================================== */
+
+function renderCountdown(){
+
+  const start = new Date("2026-12-17T00:00:00+08:00");
+  const now = new Date();
+
+  const diff = Math.ceil(
+    (start-now)/(1000*60*60*24)
+  );
+
+  const el = document.getElementById("countdown");
+
+  if(diff > 0){
+    el.textContent = `${diff} days until Taiwan 🇹🇼`;
+  }
+  else if(diff >= -4){
+    el.textContent = "We're in Taiwan 🇹🇼";
+  }
+  else{
+    el.textContent = "Taiwan memories ♡";
+  }
+}
+
+
+/* =====================================================
+   GOOGLE MAPS
+   ===================================================== */
+
+function navigateTo(stop){
+
+  const destination =
+    stop.search ||
+    `${stop.lat},${stop.lng}`;
+
+  const url =
+    "https://www.google.com/maps/dir/?api=1&destination=" +
+    encodeURIComponent(destination);
+
+  window.open(url,"_blank");
+}
+
+
+function searchGoogleMaps(query){
+
+  const url =
+    "https://www.google.com/maps/search/?api=1&query=" +
+    encodeURIComponent(query);
+
+  window.open(url,"_blank");
+}
+
+
+/* =====================================================
+   FOOD NEAR ME
+   ===================================================== */
+
+function openFoodNearMe(){
+
+  if(!navigator.geolocation){
+
+    searchGoogleMaps(
+      "Taiwanese restaurants near me"
+    );
+
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+
+    position=>{
+
+      const lat=position.coords.latitude;
+      const lng=position.coords.longitude;
+
+      const url =
+        `https://www.google.com/maps/search/?api=1&query=` +
+        encodeURIComponent("Taiwanese food") +
+        `&center=${lat},${lng}`;
+
+      window.open(url,"_blank");
+
+    },
+
+    ()=>{
+
+      searchGoogleMaps(
+        "Taiwanese food near me"
+      );
+
+    },
+
+    {
+      enableHighAccuracy:true,
+      timeout:7000
+    }
+
+  );
+}
+
+
+/* =====================================================
+   DAY SELECTOR
+   ===================================================== */
+
+function renderDaySelector(){
+
+  const holder =
+    document.getElementById("daySelector");
+
+  holder.innerHTML="";
+
+  itinerary.forEach((day,index)=>{
+
+    const button =
+      document.createElement("button");
+
+    button.className =
+      "day-pill" +
+      (index===selectedDay ? " active" : "");
+
+    button.textContent=day.short;
+
+    button.onclick=()=>{
+
+      selectedDay=index;
+
+      renderToday();
+      renderDaySelector();
+
+    };
+
+    holder.appendChild(button);
+
+  });
+
+}
+
+
+/* =====================================================
+   TODAY
+   ===================================================== */
+
+function renderToday(){
+
+  const day=itinerary[selectedDay];
+
+  document.getElementById("dayTitle")
+    .textContent=day.title;
+
+  document.getElementById("daySubtitle")
+    .textContent=day.subtitle;
+
+  const stopList =
+    document.getElementById("stopList");
+
+  stopList.innerHTML="";
+
+  day.stops.forEach((stop,index)=>{
+
+    const key=`${selectedDay}-${index}`;
+    const isDone=!!completed[key];
+
+    const card=document.createElement("div");
+
+    card.className=
+      "card stop-card" +
+      (isDone ? " done" : "");
+
+    card.innerHTML=`
+
+      <div class="stop-num">
+        ${isDone ? "✓" : index+1}
+      </div>
+
+      <div class="stop-content">
+
+        <h3>${stop.short}</h3>
+
+        <p>${stop.note}</p>
+
+        <div class="tags">
+          <span class="tag">
+            ${stop.transport}
+          </span>
+        </div>
+
+        <div class="actions">
+
+          <button
+            class="btn btn-primary nav-stop">
+            Navigate
+          </button>
+
+          <button
+            class="btn btn-secondary complete-stop">
+            ${isDone ? "Undo" : "Done"}
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+    card.querySelector(".nav-stop")
+      .onclick=()=>navigateTo(stop);
+
+    card.querySelector(".complete-stop")
+      .onclick=()=>toggleComplete(index);
+
+    stopList.appendChild(card);
+
+  });
+
+  renderNextStop();
+
+  document.getElementById("luggageToggle")
+    .className=
+      "switch" +
+      (luggageMode ? " on" : "");
+
+  document.getElementById("luggageToggle")
+    .textContent=
+      luggageMode ? "ON" : "OFF";
+
+}
+
+
+/* =====================================================
+   NEXT STOP
+   ===================================================== */
+
+function renderNextStop(){
+
+  const day=itinerary[selectedDay];
+
+  let nextIndex =
+    day.stops.findIndex((_,index)=>
+      !completed[`${selectedDay}-${index}`]
+    );
+
+  const holder =
+    document.getElementById("nextStop");
+
+  if(nextIndex===-1){
+
+    holder.innerHTML=`
+      <div class="next">
+        <div class="next-label">
+          DAY COMPLETE
+        </div>
+
+        <h2>That's today's adventure ✓</h2>
+
+        <p style="color:#746D68">
+          Everything planned for today has been completed.
+        </p>
+      </div>
+    `;
+
+    return;
+  }
+
+  const stop=day.stops[nextIndex];
+
+  holder.innerHTML=`
+
+    <div class="next">
+
+      <div class="next-label">
+        NEXT STOP · ${nextIndex+1}
+      </div>
+
+      <h2>${stop.short}</h2>
+
+      <p style="color:#746D68;margin:0">
+        ${stop.note}
+      </p>
+
+      <div class="transport-grid">
+
+        <div class="transport">
+          🚇
+          <strong>Public</strong>
+          Check live route
+        </div>
+
+        <div class="transport">
+          🚕
+          <strong>Taxi / Uber</strong>
+          ${
+            luggageMode
+            ? "Prioritize with luggage"
+            : "Compare time"
+          }
+        </div>
+
+        <div class="transport">
+          🚶
+          <strong>Walk</strong>
+          If practical
+        </div>
+
+      </div>
+
+      <button
+        id="nextNavigate"
+        class="btn btn-primary"
+        style="width:100%;margin-top:12px;padding:13px">
+        Open route in Google Maps
+      </button>
+
+    </div>
+  `;
+
+  document.getElementById("nextNavigate")
+    .onclick=()=>navigateTo(stop);
+
+}
+
+
+/* =====================================================
+   COMPLETE STOPS
+   ===================================================== */
+
+function toggleComplete(index){
+
+  const key=`${selectedDay}-${index}`;
+
+  completed[key]=!completed[key];
+
+  if(!completed[key]){
+    delete completed[key];
+  }
+
+  localStorage.setItem(
+    "taiwanCompleted",
+    JSON.stringify(completed)
+  );
+
+  renderToday();
+}
+
+
+/* =====================================================
+   LUGGAGE MODE
+   ===================================================== */
+
+document.getElementById("luggageToggle")
+.onclick=()=>{
+
+  luggageMode=!luggageMode;
+
+  localStorage.setItem(
+    "taiwanLuggageMode",
+    JSON.stringify(luggageMode)
+  );
+
+  renderToday();
+
+};
+
+
+/* =====================================================
+   FULL ITINERARY
+   ===================================================== */
+
+function renderFullItinerary(){
+
+  const holder =
+    document.getElementById("fullItinerary");
+
+  holder.innerHTML="";
+
+  itinerary.forEach((day,dayIndex)=>{
+
+    const section=document.createElement("div");
+
+    section.innerHTML=`
+
+      <div class="card">
+
+        <div class="eyebrow">
+          ${day.short}
+        </div>
+
+        <h2 style="
+          font-family:Georgia,serif;
+          margin:6px 0;
+          font-weight:500">
+
+          ${day.title}
+
+        </h2>
+
+        <p style="
+          color:#746D68;
+          margin:0 0 14px">
+
+          ${day.subtitle}
+
+        </p>
+
+        <div style="
+          background:#F5F1EB;
+          padding:11px;
+          border-radius:13px;
+          font-size:12px;
+          margin-bottom:14px">
+
+          🧳 ${day.luggage}
+
+        </div>
+
+        ${day.stops.map((stop,index)=>`
+
+          <div style="
+            display:flex;
+            gap:10px;
+            padding:10px 0;
+            border-bottom:1px solid #eee">
+
+            <strong style="color:#5B0015">
+              ${index+1}
+            </strong>
+
+            <div style="flex:1">
+
+              <strong>
+                ${stop.short}
+              </strong>
+
+              <div style="
+                color:#746D68;
+                font-size:12px;
+                margin-top:3px">
+
+                ${stop.note}
+
+              </div>
+
+              <button
+                class="btn btn-blue itinerary-nav"
+                data-day="${dayIndex}"
+                data-stop="${index}"
+                style="margin-top:7px">
+
+                Google Maps
+
+              </button>
+
+            </div>
+
+          </div>
+
+        `).join("")}
+
+      </div>
+    `;
+
+    holder.appendChild(section);
+
+  });
+
+  document.querySelectorAll(".itinerary-nav")
+    .forEach(button=>{
+
+      button.onclick=()=>{
+
+        const day=
+          Number(button.dataset.day);
+
+        const stop=
+          Number(button.dataset.stop);
+
+        navigateTo(
+          itinerary[day].stops[stop]
+        );
+
+      };
+
+    });
+
+}
+
+
+/* =====================================================
+   MAP
+   ===================================================== */
+
+function initMap(){
+
+  map=L.map("map").setView(
+    [23.9,121],
+    7
+  );
+
+  L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+      attribution:"© OpenStreetMap contributors"
+    }
+  ).addTo(map);
+
+  renderMapControls();
+  renderMap("all");
+
+}
+
+
+function renderMapControls(){
+
+  const holder=
+    document.getElementById("mapControls");
+
+  holder.innerHTML="";
+
+  const all=document.createElement("button");
+
+  all.className="day-pill active";
+  all.textContent="ALL TRIP";
+  all.dataset.mapDay="all";
+
+  all.onclick=()=>renderMap("all");
+
+  holder.appendChild(all);
+
+  itinerary.forEach((day,index)=>{
+
+    const b=document.createElement("button");
+
+    b.className="day-pill";
+    b.textContent=day.short;
+    b.dataset.mapDay=index;
+
+    b.onclick=()=>renderMap(index);
+
+    holder.appendChild(b);
+
+  });
+
+}
+
+
+function renderMap(dayChoice){
+
+  if(!map) return;
+
+  if(mapLayer){
+    map.removeLayer(mapLayer);
+  }
+
+  mapLayer=L.layerGroup().addTo(map);
+
+  const points=[];
+
+  let days=
+    dayChoice==="all"
+    ? itinerary
+    : [itinerary[dayChoice]];
+
+  days.forEach(day=>{
+
+    const line=[];
+
+    day.stops.forEach((stop,index)=>{
+
+      const marker=L.marker(
+        [stop.lat,stop.lng]
+      ).addTo(mapLayer);
+
+      marker.bindPopup(`
+        <strong>${index+1}. ${stop.short}</strong>
+        <br>
+        ${stop.note}
+      `);
+
+      line.push([stop.lat,stop.lng]);
+      points.push([stop.lat,stop.lng]);
+
+    });
+
+    if(line.length>1){
+
+      L.polyline(
+        line,
+        {
+          weight:3,
+          opacity:.65
+        }
+      ).addTo(mapLayer);
+
+    }
+
+  });
+
+  if(points.length){
+
+    map.fitBounds(
+      points,
+      {
+        padding:[25,25]
+      }
+    );
+
+  }
+
+  document.querySelectorAll(
+    "[data-map-day]"
+  ).forEach(btn=>{
+
+    btn.classList.toggle(
+      "active",
+      String(btn.dataset.mapDay)
+      ===String(dayChoice)
+    );
+
+  });
+
+}
+
+
+/* =====================================================
+   CURRENT LOCATION
+   ===================================================== */
+
+function locateMe(){
+
+  if(!navigator.geolocation){
+
+    alert(
+      "Location services are not available in this browser."
+    );
+
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+
+    position=>{
+
+      const lat=
+        position.coords.latitude;
+
+      const lng=
+        position.coords.longitude;
+
+      if(userMarker){
+        map.removeLayer(userMarker);
+      }
+
+      userMarker=L.circleMarker(
+        [lat,lng],
+        {
+          radius:9,
+          weight:4,
+          fillOpacity:1
+        }
+      ).addTo(map);
+
+      userMarker.bindPopup(
+        "You are here"
+      ).openPopup();
+
+      map.setView(
+        [lat,lng],
+        15
+      );
+
+    },
+
+    ()=>{
+
+      alert(
+        "Please allow location access so the trip map can show where you are."
+      );
+
+    },
+
+    {
+      enableHighAccuracy:true,
+      timeout:10000
+    }
+
+  );
+
+}
+
+
+/* =====================================================
+   WALLET
+   ===================================================== */
+
+function openExpense(){
+
+  document.getElementById(
+    "expenseDialog"
+  ).showModal();
+
+}
+
+
+function saveExpense(){
+
+  const amount=
+    Number(
+      document.getElementById(
+        "expenseAmount"
+      ).value
+    );
+
+  if(!amount || amount<=0){
+
+    alert(
+      "Enter the expense amount in NT$."
+    );
+
+    return;
+  }
+
+  const expense={
+
+    id:Date.now(),
+
+    amount,
+
+    description:
+      document.getElementById(
+        "expenseDescription"
+      ).value.trim()
+      || "Trip expense",
+
+    category:
+      document.getElementById(
+        "expenseCategory"
+      ).value,
+
+    paidBy:
+      document.getElementById(
+        "expensePaidBy"
+      ).value,
+
+    method:
+      document.getElementById(
+        "expenseMethod"
+      ).value,
+
+    createdAt:
+      new Date().toISOString()
+
+  };
+
+  expenses.unshift(expense);
+
+  localStorage.setItem(
+    "taiwanExpenses",
+    JSON.stringify(expenses)
+  );
+
+  document.getElementById(
+    "expenseAmount"
+  ).value="";
+
+  document.getElementById(
+    "expenseDescription"
+  ).value="";
+
+  document.getElementById(
+    "expenseDialog"
+  ).close();
+
+  renderWallet();
+
+}
+
+
+function deleteExpense(id){
+
+  if(!confirm("Delete this expense?")){
+    return;
+  }
+
+  expenses=
+    expenses.filter(
+      expense=>expense.id!==id
+    );
+
+  localStorage.setItem(
+    "taiwanExpenses",
+    JSON.stringify(expenses)
+  );
+
+  renderWallet();
+
+}
+
+
+function renderWallet(){
+
+  const totalTWD=
+    expenses.reduce(
+      (sum,e)=>sum+Number(e.amount),
+      0
+    );
+
+  const totalPHP=
+    totalTWD*PHP_PER_TWD;
+
+  const remainingPHP=
+    Math.max(
+      0,
+      TRIP_BUDGET_PHP-totalPHP
+    );
+
+  const cashSpent=
+    expenses
+      .filter(e=>e.method==="Cash")
+      .reduce(
+        (sum,e)=>sum+Number(e.amount),
+        0
+      );
+
+  const cashRemaining=
+    STARTING_CASH_TWD-cashSpent;
+
+  document.getElementById(
+    "spentTWD"
+  ).textContent=
+    `NT$${totalTWD.toLocaleString()}`;
+
+  document.getElementById(
+    "spentPHP"
+  ).textContent=
+    `₱${Math.round(totalPHP).toLocaleString()}`;
+
+  document.getElementById(
+    "remainingPHP"
+  ).textContent=
+    `₱${Math.round(remainingPHP).toLocaleString()}`;
+
+  document.getElementById(
+    "cashRemaining"
+  ).textContent=
+    `NT$${Math.max(0,cashRemaining).toLocaleString()}`;
+
+  document.getElementById(
+    "expenseCount"
+  ).textContent=
+    expenses.length;
+
+  const holder=
+    document.getElementById(
+      "expenseList"
+    );
+
+  if(!expenses.length){
+
+    holder.innerHTML=`
+      <div style="
+        text-align:center;
+        padding:24px;
+        color:#746D68">
+
+        No expenses yet.<br>
+        Your first Taiwan purchase will appear here.
+
+      </div>
+    `;
+
+    return;
+  }
+
+  holder.innerHTML=
+    expenses.map(expense=>`
+
+      <div class="expense-row">
+
+        <div class="expense-info">
+
+          <strong>
+            ${escapeHTML(expense.description)}
+          </strong>
+
+          <small>
+            ${expense.category}
+            · ${expense.paidBy}
+            · ${expense.method}
+          </small>
+
+        </div>
+
+        <div class="expense-amount">
+
+          NT$${Number(expense.amount).toLocaleString()}
+
+          <div style="
+            color:#999;
+            font-size:10px;
+            margin-top:4px">
+
+            ≈ ₱${Math.round(
+              expense.amount*PHP_PER_TWD
+            ).toLocaleString()}
+
+          </div>
+
+          <button
+            onclick="deleteExpense(${expense.id})"
+            style="
+              border:0;
+              background:none;
+              color:#A55;
+              font-size:10px;
+              margin-top:5px">
+
+            delete
+
+          </button>
+
+        </div>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+/* =====================================================
+   BASIC HTML ESCAPE
+   ===================================================== */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+   ===================================================== */
+
+document.querySelectorAll(".nav-btn")
+.forEach(button=>{
+
+  button.onclick=()=>{
+
+    document.querySelectorAll(
+      ".screen"
+    ).forEach(screen=>
+      screen.classList.remove("active")
+    );
+
+    document.querySelectorAll(
+      ".nav-btn"
+    ).forEach(btn=>
+      btn.classList.remove("active")
+    );
+
+    document.getElementById(
+      button.dataset.screen
+    ).classList.add("active");
+
+    button.classList.add("active");
+
+    if(
+      button.dataset.screen==="mapScreen"
+    ){
+
+      setTimeout(()=>{
+
+        if(!map){
+          initMap();
+        }
+        else{
+          map.invalidateSize();
+        }
+
+      },100);
+
+    }
+
+    if(
+      button.dataset.screen==="wallet"
+    ){
+      renderWallet();
+    }
+
+  };
+
+});
+
+
+/* =====================================================
+   INITIALIZE
+   ===================================================== */
+
+renderCountdown();
+renderDaySelector();
+renderToday();
+renderFullItinerary();
+renderWallet();
+
+</script>
+
+</body>
+</html>
