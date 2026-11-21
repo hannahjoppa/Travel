@@ -9,6 +9,11 @@ Mobile-first, offline-capable itinerary, interactive numbered route atlas, credi
 - API rejects invalid transaction batches instead of silently discarding bad entries.
 - Offline cache bumped for upgrade.
 
+## Trip-prep additions
+- **Pre-departure checklist** covers passports/proofs, eTravel, TWAC, airline check-in, seats/baggage, HSR/bus tickets, money/cards, EasyCard/iPASS, connectivity, charging, hotel shuttle, luggage courier, health/weather prep, and offline backups.
+- **Immigration mode** presents a compact purpose, travelers, dates, return flight, accommodation schedule, itinerary, funds summary, TWAC status, emergency numbers, and links to the existing Drive proof folder and budget Sheet.
+- Checklist state is local-first and works offline. Sensitive passport files are intentionally not stored in the public repository or Vercel bundle.
+
 ## Existing Supabase project
 Your `public.trip_expenses (id text primary key, data jsonb not null)` table already exists with RLS enabled. **Do not rerun SQL or alter existing tables.**
 
