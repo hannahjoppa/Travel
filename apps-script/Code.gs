@@ -3,6 +3,7 @@
  * "Actual Expenses" tab and rows 5 onward; no passport/proof files are read.
  */
 const SHEET_NAME = 'Actual Expenses';
+const SPREADSHEET_ID = '1qsNTDhRnq1Oa6HG1jNBpNZLT6iMJS9PAOzljqyn8sLw';
 const START_ROW = 5;
 const HEADERS = ['Expense date','Paid by','Budget line / experience','Description','Category','Payment method','Amount NT$','PHP value','Cash spend NT$','Receipt URL / filename','Verification status'];
 
@@ -17,7 +18,8 @@ function doPost(e) {
     const body = JSON.parse((e && e.postData && e.postData.contents) || '{}');
     const entries = Array.isArray(body.entries) ? body.entries : [];
     if (entries.length > 500) return json_({ error: 'Too many entries' }, 400);
-    const sheet = SpreadsheetApp.getActive().getSheetByName(SHEET_NAME);
+    const book = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = book.getSheetByName(SHEET_NAME);
     if (!sheet) return json_({ error: 'Missing Actual Expenses sheet' }, 500);
     const last = Math.max(sheet.getLastRow(), START_ROW - 1);
     const width = 16; // A:K visible ledger + L:P private sync helper columns
